@@ -52,14 +52,17 @@ messages.
 
 A basic example may be;
 ```css
+/* Ensures validation messages are not rendered if that input has not yet been modified */
 .validation-untouched {
   display: none;
 }
 
+/* Ensures validation messages are not rendered if the input is actually valid */ 
 .validation-valid {
   display: none;
 }
 
+/* Hides validation messages whilst the Input has cursor focus */
 .container-focus .validation-invalid {
   display: none;
 }
