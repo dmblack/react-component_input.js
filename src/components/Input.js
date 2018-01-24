@@ -387,7 +387,9 @@ class Input extends Component {
   render() {
     const containerClassNames = `${
       this.props.containerClassNames
-        ? `${this.props.containerClassNames}`
+        ? `${this.props.containerClassNames instanceof Array
+          ? `${this.props.containerClassNames.join(' ')}`
+          : `${this.props.containerClassNames}`}`
         : `input input-container input-${this.props.type}`
     } ${this.state.hasChanged ? `container-touched` : `container-untouched`} ${
       this.state.justChanged ? `container-justchanged` : ``
@@ -396,22 +398,28 @@ class Input extends Component {
     }`;
     const inputClassNames = `${
       this.props.inputClassNames
-        ? `${this.props.inputClassNames}`
-        : `input input-input`
+        ? `${this.props.inputClassNames instanceof Array
+          ? `${this.props.inputClassNames.join(' ')}`
+          : `${this.props.inputClassNames}`}`
+      : `input input-input`
     } ${this.state.hasChanged ? `input-touched` : `input-untouched`} ${
       this.state.justChanged ? `input-justchanged` : ``
     } ${this.state.isValid ? `input-valid` : `input-invalid`}`;
     const labelClassNames = `${
       this.props.labelClassNames
-        ? `${this.props.labelClassNames}`
-        : `input input-label`
+        ? `${this.props.labelClassNames instanceof Array
+          ? `${this.props.labelClassNames.join(' ')}`
+          : `${this.props.labelClassNames}`}`
+      : `input input-label`
     } ${this.state.hasChanged ? `label-touched` : `label-untouched`} ${
       this.state.justChanged ? `label-justchanged` : ``
     } ${this.state.isValid ? `label-valid` : `label-invalid`}`;
     const validationClassNames = `${
       this.props.validationClassNames
-        ? `${this.props.validationClassNames}`
-        : `input input-validation`
+        ? `${this.props.validationClassNames instanceof Array
+          ? `${this.props.validationClassNames.join(' ')}`
+          : `${this.props.validationClassNames}`}`
+      : `input input-validation`
     } ${
       this.state.hasChanged ? `validation-touched` : `validation-untouched`
     } ${this.state.justChanged ? `validation-justchanged` : ``} ${
