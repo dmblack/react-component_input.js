@@ -1,0 +1,27 @@
+{
+  "name": "react-component_input",
+  "version": "3.1.11",
+  "homepage": "https://github.com/dmblack/react-component_input",
+  "authors": [
+    "Dustyn Blackmore"
+  ],
+  "description": "An input component to serve the common good.",
+  "main": "dist/react-component_input.js",
+  "keywords": [
+    "react",
+    "input"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "specs",
+    "modules",
+    "examples",
+    "script",
+    "CONTRIBUTING.md",
+    "jest.conf.js",
+    "package.json"
+  ]
+}
