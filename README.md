@@ -41,13 +41,35 @@ Example:
 
 ## Styles
 
-Documented here; Styles are deliberately not part of the component. The component does export a vast layer of classes that may
-then be used to customize the style of your app. As above, there's access to prop's that allow overrides to these defaults.
+Documented here; Styles are, deliberately, not part of the component. The component does export a vast layer of CSS classes
+applied to elements that may then be used to customize the style of your app. Additionally; passing appropriate className
+overrides allows you to customise / manage these defaults.
 
+Important:
+This also means that validation errors are shown by default! You can manage this by using the toggle classes of;
+.validation-untouched, .validation-valid, and .container-focus to properly manage the behavior of your validation error
+messages.
+
+A basic example may be;
+```css
+.validation-untouched {
+  display: none;
+}
+
+.validation-valid {
+  display: none;
+}
+
+.container-focus .validation-invalid {
+  display: none;
+}
+```
 
 ## Examples
 
 Inside an app:
+Note: These examples include the optional validation object (validMaxLength, validMinLength) which are passed as an array
+to the Input object via the validation prop.
 
 ```jsx
 import React, { Component } from 'react';

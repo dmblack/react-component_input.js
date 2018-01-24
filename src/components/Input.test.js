@@ -138,7 +138,7 @@ it('p (validation) should have appropriate classes when over-ridden by an array 
   expect(input.length).toEqual(1);
 });
 
-it('Accepts a placeholder', () => {
+it('accepts, and renders, placeholder property text', () => {
   const wrapper = shallow(
     <Input
       type="text"
@@ -153,7 +153,7 @@ it('Accepts a placeholder', () => {
   expect(placeholder.length).toEqual(1);
 });
 
-it('Accepts a placeholder, and ensures not false positive', () => {
+it('accepts, and renders, placeholder property text - control (ensures no false positive)', () => {
   const wrapper = shallow(
     <Input
       type="text"
@@ -170,7 +170,7 @@ it('Accepts a placeholder, and ensures not false positive', () => {
   expect(placeholder.length).toEqual(0);
 });
 
-it("Should render without crashing, if there's a validation object", () => {
+it("accepts a validation object, with default state validation-invalid", () => {
   const wrapper = shallow(
     <Input
       type="text"
@@ -184,7 +184,7 @@ it("Should render without crashing, if there's a validation object", () => {
   expect(hiddenValidationError.length).toEqual(1);
 });
 
-it('Should remain valid after input text change', () => {
+it('accepts a validation object, and updates state to validation-valid upon successful validation criteria (text input simulation)', () => {
   const wrapper = shallow(
     <Input
       type="text"
@@ -201,7 +201,8 @@ it('Should remain valid after input text change', () => {
   expect(hiddenValidationError.length).toEqual(0);
 });
 
-it('Should return invalid after input text change to nothing', () => {
+it('accepts a validation object, and updates state to validation-valid upon successful validation criteria (text input simulation) \
+then validation-invalid upon additional changes failing validation criteria', () => {
   const wrapper = shallow(
     <Input
       type="text"
