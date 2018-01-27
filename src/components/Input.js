@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
 
 class Input extends Component {
   constructor(props) {
@@ -20,13 +20,13 @@ class Input extends Component {
       : () => true;
     if (this.props.onBlur) {
       switch (typeof this.props.onBlur) {
-        case 'object':
+        case "object":
           // Type safe due to props validation of this object. This is an array.
           this.onBlur = this.props.onBlur.map(callBack => {
             return callBack.bind(this);
           });
           break;
-        case 'function':
+        case "function":
           this.onBlur = this.props.onBlur.bind(this);
           break;
       }
@@ -39,13 +39,13 @@ class Input extends Component {
       : () => true;
     if (this.props.onChange) {
       switch (typeof this.props.onChange) {
-        case 'object':
+        case "object":
           // Type safe due to props validation of this object. This is an array.
           this.onChange = this.props.onChange.map(callBack => {
             return callBack.bind(this);
           });
           break;
-        case 'function':
+        case "function":
           this.onChange = this.props.onChange.bind(this);
           break;
       }
@@ -58,13 +58,13 @@ class Input extends Component {
       : () => true;
     if (this.props.onClick) {
       switch (typeof this.props.onClick) {
-        case 'object':
+        case "object":
           // Type safe due to props validation of this object. This is an array.
           this.onClick = this.props.onClick.map(callBack => {
             return callBack.bind(this);
           });
           break;
-        case 'function':
+        case "function":
           this.onClick = this.props.onClick.bind(this);
           break;
       }
@@ -77,13 +77,13 @@ class Input extends Component {
       : () => true;
     if (this.props.onFocus) {
       switch (typeof this.props.onFocus) {
-        case 'object':
+        case "object":
           // Type safe due to props validation of this object. This is an array.
           this.onFocus = this.props.onFocus.map(callBack => {
             return callBack.bind(this);
           });
           break;
-        case 'function':
+        case "function":
           this.onFocus = this.props.onFocus.bind(this);
           break;
       }
@@ -113,12 +113,12 @@ class Input extends Component {
   }
 
   componentDidMount() {
-    let ourCallbackResult = '';
+    let ourCallbackResult = "";
     switch (typeof this.props.onComponentDidMount) {
-      case 'function':
+      case "function":
         ourCallbackResult = this.props.onComponentDidMount(this);
         break;
-      case 'object':
+      case "object":
         if (this.props.onComponentDidMount instanceof Array) {
           ourCallbackResult = this.props.onComponentDidMount.map(aFunction => {
             return aFunction(this);
@@ -129,7 +129,7 @@ class Input extends Component {
         ourCallbackResult = false;
         break;
     }
-    if (ourCallbackResult !== '') {
+    if (ourCallbackResult !== "") {
       this.setState({
         onComponentDidMountCallback: ourCallbackResult
       });
@@ -159,13 +159,13 @@ class Input extends Component {
    * @param {*} event
    */
   handleOnBlurCallback(event) {
-    let ourCallbackResult = '';
+    let ourCallbackResult = "";
     let _this = Object.assign({}, this.state, event);
     switch (typeof this.onBlur) {
-      case 'function':
+      case "function":
         ourCallbackResult = this.onBlur(_this);
         break;
-      case 'object':
+      case "object":
         if (this.onBlur instanceof Array) {
           ourCallbackResult = this.onBlur.map(aFunction => {
             return aFunction(_this);
@@ -176,7 +176,7 @@ class Input extends Component {
         ourCallbackResult = false;
         break;
     }
-    if (ourCallbackResult !== '') {
+    if (ourCallbackResult !== "") {
       this.setState({
         onBlurCallback: ourCallbackResult
       });
@@ -195,7 +195,7 @@ class Input extends Component {
     let thisValue = clonedEvent.target.value || clonedEvent.value || false;
 
     if (this.state.valueMask) {
-      thisValue = this.state.valueMask.replace('{{value}}', thisValue);
+      thisValue = this.state.valueMask.replace("{{value}}", thisValue);
     }
 
     this.setState(
@@ -220,13 +220,13 @@ class Input extends Component {
    * @param {*} event - Passed from the input control. Be careful to handle the different types of params passed from different input.
    */
   handleOnChangeCallback(event) {
-    let ourCallbackResult = '';
+    let ourCallbackResult = "";
     let _this = Object.assign({}, this.state, event);
     switch (typeof this.onChange) {
-      case 'function':
+      case "function":
         ourCallbackResult = this.onChange(_this);
         break;
-      case 'object':
+      case "object":
         if (this.onChange instanceof Array) {
           ourCallbackResult = this.onChange.map(aFunction => {
             return aFunction(_this);
@@ -237,7 +237,7 @@ class Input extends Component {
         ourCallbackResult = false;
         break;
     }
-    if (ourCallbackResult !== '') {
+    if (ourCallbackResult !== "") {
       this.setState({
         onChangeCallback: ourCallbackResult
       });
@@ -266,13 +266,13 @@ class Input extends Component {
    * @param {*} event - Passed from the input control. Be careful to handle the different types of params passed from different input.
    */
   handleOnClickCallback(event) {
-    let ourCallbackResult = '';
+    let ourCallbackResult = "";
     let _this = Object.assign({}, this.state, event);
     switch (typeof this.onClick) {
-      case 'function':
+      case "function":
         ourCallbackResult = this.onClick(_this);
         break;
-      case 'object':
+      case "object":
         if (this.onClick instanceof Array) {
           ourCallbackResult = this.onClick.map(aFunction => {
             return aFunction(_this);
@@ -283,7 +283,7 @@ class Input extends Component {
         ourCallbackResult = false;
         break;
     }
-    if (ourCallbackResult !== '') {
+    if (ourCallbackResult !== "") {
       this.setState({
         onClickCallback: ourCallbackResult
       });
@@ -308,13 +308,13 @@ class Input extends Component {
    * @param {*} event - Passed from the input control. Be careful to handle the different types of params passed from different input.
    */
   handleOnFocusCallback(event) {
-    let ourCallbackResult = '';
+    let ourCallbackResult = "";
     let _this = Object.assign({}, this.state, event);
     switch (typeof this.onFocus) {
-      case 'function':
+      case "function":
         ourCallbackResult = this.onFocus(_this);
         break;
-      case 'object':
+      case "object":
         if (this.onFocus instanceof Array) {
           ourCallbackResult = this.onFocus.map(aFunction => {
             return aFunction(_this);
@@ -325,7 +325,7 @@ class Input extends Component {
         ourCallbackResult = false;
         break;
     }
-    if (ourCallbackResult !== '') {
+    if (ourCallbackResult !== "") {
       this.setState({
         onFocusCallback: ourCallbackResult
       });
@@ -347,7 +347,7 @@ class Input extends Component {
   handleHasValidation(event) {
     let value = undefined;
     switch (this.props.type) {
-      case 'text':
+      case "text":
         value = event.target.value;
         break;
 
@@ -389,7 +389,7 @@ class Input extends Component {
     const containerClassNames = `${
       this.props.containerClassNames
         ? `${this.props.containerClassNames instanceof Array
-          ? `${this.props.containerClassNames.join(' ')}`
+          ? `${this.props.containerClassNames.join(" ")}`
           : `${this.props.containerClassNames}`}`
         : `input input-container input-${this.props.type}`
     } ${this.state.hasChanged ? `container-touched` : `container-untouched`} ${
@@ -400,7 +400,7 @@ class Input extends Component {
     const inputClassNames = `${
       this.props.inputClassNames
         ? `${this.props.inputClassNames instanceof Array
-          ? `${this.props.inputClassNames.join(' ')}`
+          ? `${this.props.inputClassNames.join(" ")}`
           : `${this.props.inputClassNames}`}`
       : `input input-input`
     } ${this.state.hasChanged ? `input-touched` : `input-untouched`} ${
@@ -409,7 +409,7 @@ class Input extends Component {
     const labelClassNames = `${
       this.props.labelClassNames
         ? `${this.props.labelClassNames instanceof Array
-          ? `${this.props.labelClassNames.join(' ')}`
+          ? `${this.props.labelClassNames.join(" ")}`
           : `${this.props.labelClassNames}`}`
       : `input input-label`
     } ${this.state.hasChanged ? `label-touched` : `label-untouched`} ${
@@ -418,7 +418,7 @@ class Input extends Component {
     const validationClassNames = `${
       this.props.validationClassNames
         ? `${this.props.validationClassNames instanceof Array
-          ? `${this.props.validationClassNames.join(' ')}`
+          ? `${this.props.validationClassNames.join(" ")}`
           : `${this.props.validationClassNames}`}`
       : `input input-validation`
     } ${
@@ -441,10 +441,10 @@ class Input extends Component {
           onClick={this.handleClick}
           onFocus={this.handleFocus}
           type={this.props.type}
-          placeholder={this.props.placeholder || ''}
+          placeholder={this.props.placeholder || ""}
         />
         <p className={validationClassNames}>
-          {this.state.validationErrorMessage || 'invalid'}
+          {this.state.validationErrorMessage || "invalid"}
         </p>
       </div>
     );
@@ -500,14 +500,14 @@ Input.propTypes = {
   ]),
   placeholder: PropTypes.string,
   type: PropTypes.string.isRequired,
-  /** A validation class names override - defaults to 'validation-<criteria>'. Expects a string, or array of strings */
+  /** A validation class names override - defaults to "validation-<criteria>". Expects a string, or array of strings */
   validationClassNames: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.string),
     PropTypes.string
   ]),
   /**
-   * Validation expect an object, or array of objects, with 'callback', and 'validationState' required properties.
-   *  I've chosen to supply an isolated property to appropriately abstract, yet 'contain' all the states of Validation.
+   * Validation expect an object, or array of objects, with "callback", and "validationState" required properties.
+   *  I"ve chosen to supply an isolated property to appropriately abstract, yet "contain" all the states of Validation.
    */
   validation: PropTypes.oneOfType([
     PropTypes.arrayOf(
@@ -534,7 +534,7 @@ Input.propTypes = {
    *
    *  An opportunity to mask the return value supplied by the input. Replaces {{value}} with the actual value of the input.
    *    An example may be;
-   *    'First Name: {{value}}'.
+   *    "First Name: {{value}}".
    *
    * Note: Input Mask is NOT supplied to validators.
    */
