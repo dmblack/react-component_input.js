@@ -17,66 +17,77 @@ class Input extends Component {
     this.handleBlur = this.handleBlur.bind(this);
     this.handleOnBlurCallback = this.props.onBlur
       ? this.handleOnBlurCallback.bind(this)
-      : () => {
-          return true;
-        };
-    if (this.props.onBlur && typeof this.props.onBlur === 'function') {
-      this.onBlur = this.props.onBlur.bind(this);
-    }
-    if (this.props.onBlur && this.props.onBlur instanceof Array) {
-      this.onBlur = this.props.onBlur.map(callBack => {
-        return callBack.bind(this);
-      });
+      : () => true;
+    if (this.props.onBlur) {
+      switch (typeof this.props.onBlur) {
+        case 'object':
+          // Type safe due to props validation of this object. This is an array.
+          this.onBlur = this.props.onBlur.map(callBack => {
+            return callBack.bind(this);
+          });
+          break;
+        case 'function':
+          this.onBlur = this.props.onBlur.bind(this);
+          break;
+      }
     }
 
     // onChange
     this.handleChange = this.handleChange.bind(this);
     this.handleOnChangeCallback = this.props.onChange
       ? this.handleOnChangeCallback.bind(this)
-      : () => {
-          return true;
-        };
-    if (this.props.onChange && typeof this.props.onChange === 'function') {
-      this.onChange = this.props.onChange.bind(this);
-    }
-    if (this.props.onChange && this.props.onChange instanceof Array) {
-      this.onChange = this.props.onChange.map(callBack => {
-        return callBack.bind(this);
-      });
+      : () => true;
+    if (this.props.onChange) {
+      switch (typeof this.props.onChange) {
+        case 'object':
+          // Type safe due to props validation of this object. This is an array.
+          this.onChange = this.props.onChange.map(callBack => {
+            return callBack.bind(this);
+          });
+          break;
+        case 'function':
+          this.onChange = this.props.onChange.bind(this);
+          break;
+      }
     }
 
     // onClick
     this.handleClick = this.handleClick.bind(this);
     this.handleOnClick = this.props.onClick
-      ? this.handleOnClick.bind(this)
-      : () => {
-          return true;
-        };
-    if (this.props.onClick && typeof this.props.onClick === 'function') {
-      this.onClick = this.props.onClick.bind(this);
-    }
-    if (this.props.onClick && this.props.onClick instanceof Array) {
-      this.onClick = this.props.onClick.map(callBack => {
-        return callBack.bind(this);
-      });
+      ? this.handleClick.bind(this)
+      : () => true;
+    if (this.props.onClick) {
+      switch (typeof this.props.onClick) {
+        case 'object':
+          // Type safe due to props validation of this object. This is an array.
+          this.onClick = this.props.onClick.map(callBack => {
+            return callBack.bind(this);
+          });
+          break;
+        case 'function':
+          this.onClick = this.props.onClick.bind(this);
+          break;
+      }
     }
 
     // onFocus
     this.handleFocus = this.handleFocus.bind(this);
     this.handleOnFocusCallback = this.props.onFocus
       ? this.handleOnFocusCallback.bind(this)
-      : () => {
-          return true;
-        };
-    if (this.props.onFocus && typeof this.props.onFocus === 'function') {
-      this.onFocus = this.props.onFocus.bind(this);
+      : () => true;
+    if (this.props.onFocus) {
+      switch (typeof this.props.onFocus) {
+        case 'object':
+          // Type safe due to props validation of this object. This is an array.
+          this.onFocus = this.props.onFocus.map(callBack => {
+            return callBack.bind(this);
+          });
+          break;
+        case 'function':
+          this.onFocus = this.props.onFocus.bind(this);
+          break;
+      }
     }
-    if (this.props.onFocus && this.props.onFocus instanceof Array) {
-      this.onFocus = this.props.onFocus.map(callBack => {
-        return callBack.bind(this);
-      });
-    }
-
     // Handles changed state (updating untouched classes)
     this.handleHasChanged = this.handleHasChanged.bind(this);
 
@@ -104,6 +115,9 @@ class Input extends Component {
   componentDidMount() {
     let ourCallbackResult = '';
     switch (typeof this.props.onComponentDidMount) {
+      case 'function':
+        ourCallbackResult = this.props.onComponentDidMount(this);
+        break;
       case 'object':
         if (this.props.onComponentDidMount instanceof Array) {
           ourCallbackResult = this.props.onComponentDidMount.map(aFunction => {
@@ -111,11 +125,6 @@ class Input extends Component {
           });
         }
         break;
-
-      case 'function':
-        ourCallbackResult = this.props.onComponentDidMount(this);
-        break;
-
       default:
         ourCallbackResult = false;
         break;
@@ -153,6 +162,9 @@ class Input extends Component {
     let ourCallbackResult = '';
     let _this = Object.assign({}, this.state, event);
     switch (typeof this.onBlur) {
+      case 'function':
+        ourCallbackResult = this.onBlur(_this);
+        break;
       case 'object':
         if (this.onBlur instanceof Array) {
           ourCallbackResult = this.onBlur.map(aFunction => {
@@ -160,11 +172,6 @@ class Input extends Component {
           });
         }
         break;
-
-      case 'function':
-        ourCallbackResult = this.onBlur(_this);
-        break;
-
       default:
         ourCallbackResult = false;
         break;
@@ -216,6 +223,9 @@ class Input extends Component {
     let ourCallbackResult = '';
     let _this = Object.assign({}, this.state, event);
     switch (typeof this.onChange) {
+      case 'function':
+        ourCallbackResult = this.onChange(_this);
+        break;
       case 'object':
         if (this.onChange instanceof Array) {
           ourCallbackResult = this.onChange.map(aFunction => {
@@ -223,11 +233,6 @@ class Input extends Component {
           });
         }
         break;
-
-      case 'function':
-        ourCallbackResult = this.onChange(_this);
-        break;
-
       default:
         ourCallbackResult = false;
         break;
@@ -264,6 +269,9 @@ class Input extends Component {
     let ourCallbackResult = '';
     let _this = Object.assign({}, this.state, event);
     switch (typeof this.onClick) {
+      case 'function':
+        ourCallbackResult = this.onClick(_this);
+        break;
       case 'object':
         if (this.onClick instanceof Array) {
           ourCallbackResult = this.onClick.map(aFunction => {
@@ -271,11 +279,6 @@ class Input extends Component {
           });
         }
         break;
-
-      case 'function':
-        ourCallbackResult = this.onClick(_this);
-        break;
-
       default:
         ourCallbackResult = false;
         break;
@@ -308,6 +311,9 @@ class Input extends Component {
     let ourCallbackResult = '';
     let _this = Object.assign({}, this.state, event);
     switch (typeof this.onFocus) {
+      case 'function':
+        ourCallbackResult = this.onFocus(_this);
+        break;
       case 'object':
         if (this.onFocus instanceof Array) {
           ourCallbackResult = this.onFocus.map(aFunction => {
@@ -315,11 +321,6 @@ class Input extends Component {
           });
         }
         break;
-
-      case 'function':
-        ourCallbackResult = this.onFocus(_this);
-        break;
-
       default:
         ourCallbackResult = false;
         break;
