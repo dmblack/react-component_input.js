@@ -2,7 +2,7 @@ var fs = require('fs');
 var path = require('path');
 var webpack = require('webpack');
 
-var EXAMPLES_DIR = path.resolve(__dirname, 'examples');
+// var EXAMPLES_DIR = path.resolve(__dirname, 'examples');
 
 function isDirectory(dir) {
   return fs.lstatSync(dir).isDirectory();
@@ -29,7 +29,7 @@ module.exports = {
   output: {
     filename: '[name].js',
     chunkFilename: '[id].chunk.js',
-    path: path.resolve(__dirname, './examples/__build__'),
+    // path: path.resolve(__dirname, './examples/__build__'),
     publicPath: '/__build__/'
   },
 
