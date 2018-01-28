@@ -2,7 +2,7 @@
 
 An input component to serve the common good.
 
-[![Build Status](https://travis-ci.org/dmblack/react-component_input.js.svg?branch=master)](https://travis-ci.org/dmblack/react-component_input)
+[![Build Status](https://travis-ci.org/dmblack/react-component_input.js.svg?branch=master)](https://travis-ci.org/dmblack/react-component_input.js)
 
 ## Table of Contents
 
