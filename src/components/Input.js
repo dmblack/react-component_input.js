@@ -192,7 +192,25 @@ class Input extends Component {
   handleChange(event) {
     let clonedEvent = Object.assign({}, event);
 
-    let thisValue = clonedEvent.target.value || clonedEvent.value || false;
+    let thisValue = null;
+
+    switch (this.props.type) {
+      case 'button':
+        thisValue = clonedEvent.target.value;
+        break;
+      case 'radio':
+        thisValue = clonedEvent.target.value;
+        break;
+      case 'text':
+        thisValue = clonedEvent.target.value;
+        break;
+      case 'textarea':
+        thisValue = clonedEvent.target.value;
+        break;
+      default:
+        thisValue = clonedEvent.target.value || clonedEvent.value || false;
+        break;
+    }
 
     if (this.state.valueMask) {
       thisValue = this.state.valueMask.replace("{{value}}", thisValue);
@@ -250,6 +268,11 @@ class Input extends Component {
    */
   handleClick(event) {
     let clonedEvent = Object.assign({}, event);
+
+    // We need a button handler, as this is the only way to which this input type has 'changed'.
+    if (this.props.type === 'button') {
+      this.handleChange(clonedEvent);
+    }
     this.setState(
       {
         wasClicked: true
@@ -347,11 +370,20 @@ class Input extends Component {
   handleHasValidation(event) {
     let value = undefined;
     switch (this.props.type) {
+      case "radio":
+        value = event.target.on;
+        break;
+
       case "text":
         value = event.target.value;
         break;
 
+      case "textarea":
+        value = event.target.value;
+        break;
+
       default:
+        value = true;
         break;
     }
     let validationResult = undefined;
@@ -427,12 +459,35 @@ class Input extends Component {
       this.state.isValid ? `validation-valid` : `validation-invalid`
     }`;
 
-    return (
-      <div className={containerClassNames}>
-        <label className={labelClassNames} htmlFor={this.props.identifier}>
-          {this.props.labelContent}
-        </label>
-        <input
+    let thisInput = <p>Unsupported Input</p>
+    switch (this.props.type) {
+      case 'button':
+      thisInput = <input
+        className={inputClassNames}
+        id={this.props.identifier}
+        name={this.props.name || this.props.identifier}
+        onBlur={this.handleBlur}
+        onChange={this.handleChange}
+        onClick={this.handleClick}
+        onFocus={this.handleFocus}
+        type={this.props.type}
+        value={this.props.value}
+      />
+
+      case 'radio':
+        thisInput = <input
+          className={inputClassNames}
+          id={this.props.identifier}
+          name={this.props.name || this.props.identifier}
+          onBlur={this.handleBlur}
+          onChange={this.handleChange}
+          onClick={this.handleClick}
+          onFocus={this.handleFocus}
+          type={this.props.type}
+        />
+
+      case 'text': 
+        thisInput = <input
           className={inputClassNames}
           id={this.props.identifier}
           name={this.props.name || this.props.identifier}
@@ -443,6 +498,45 @@ class Input extends Component {
           type={this.props.type}
           placeholder={this.props.placeholder || ""}
         />
+        break;
+
+      case 'textarea':
+        thisInput = <textarea
+          className={inputClassNames}
+          id={this.props.identifier}
+          name={this.props.name || this.props.identifier}
+          onBlur={this.handleBlur}
+          onChange={this.handleChange}
+          onClick={this.handleClick}
+          onFocus={this.handleFocus}
+          type={this.props.type}
+          placeholder={this.props.placeholder || ""}
+        />
+        break;
+
+      default:
+        thisInput = <input
+          className={inputClassNames}
+          id={this.props.identifier}
+          name={this.props.name || this.props.identifier}
+          onBlur={this.handleBlur}
+          onChange={this.handleChange}
+          onClick={this.handleClick}
+          onFocus={this.handleFocus}
+          type={this.props.type}
+          placeholder={this.props.placeholder || ""}
+        />
+    }
+    if (this.props.type === 'text') {
+
+    }
+
+    return (
+      <div className={containerClassNames}>
+        <label className={labelClassNames} htmlFor={this.props.identifier}>
+          {this.props.labelContent}
+        </label>
+        {thisInput}
         <p className={validationClassNames}>
           {this.state.validationErrorMessage || "invalid"}
         </p>
@@ -529,6 +623,7 @@ Input.propTypes = {
       tooltip: PropTypes.string
     })
   ]),
+  value: PropTypes.string,
   /**
    * valueMask: {string}
    *
