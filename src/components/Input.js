@@ -53,8 +53,8 @@ class Input extends Component {
 
     // onClick
     this.handleClick = this.handleClick.bind(this);
-    this.handleOnClick = this.props.onClick
-      ? this.handleClick.bind(this)
+    this.handleOnClickCallback = this.props.onClick
+      ? this.handleOnClickCallback.bind(this)
       : () => true;
     if (this.props.onClick) {
       switch (typeof this.props.onClick) {
@@ -272,7 +272,7 @@ class Input extends Component {
     // We need a button handler, as this is the only way to which this input type has 'changed'.
     if (this.props.type === 'button') {
       this.handleChange(clonedEvent);
-    }
+    } 
     this.setState(
       {
         wasClicked: true
