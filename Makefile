@@ -1,6 +1,7 @@
+JQ=$(shell which jq)
+NODE=$(shell which node)
 NPM=$(shell which npm)
 YARN=$(shell which yarn)
-JQ=$(shell which jq)
 
 BABEL=./node_modules/.bin/babel
 COVERALLS=./node_modules/coveralls/bin/coveralls.js

@@ -8,9 +8,11 @@ class Input extends Component {
     this.state = {
       hasChanged: false,
       id: this.props.identifier || undefined,
+      initialValue: this.props.initialValue || undefined,
       isValid: false,
       justChanged: false,
-      valueMask: this.props.valueMask || undefined
+      value: this.props.value || undefined,
+      valueMask: this.props.valueMask || undefined,
     };
 
     // onBlur
@@ -471,7 +473,7 @@ class Input extends Component {
         onClick={this.handleClick}
         onFocus={this.handleFocus}
         type={this.props.type}
-        value={this.props.value}
+        value={this.state.value}
       />
 
       case 'radio':
@@ -495,8 +497,9 @@ class Input extends Component {
           onChange={this.handleChange}
           onClick={this.handleClick}
           onFocus={this.handleFocus}
-          type={this.props.type}
           placeholder={this.props.placeholder || ""}
+          type={this.props.type}
+          value={this.state.value}
         />
         break;
 
@@ -509,8 +512,9 @@ class Input extends Component {
           onChange={this.handleChange}
           onClick={this.handleClick}
           onFocus={this.handleFocus}
-          type={this.props.type}
           placeholder={this.props.placeholder || ""}
+          type={this.props.type}
+          value={this.state.value}
         />
         break;
 
@@ -523,8 +527,9 @@ class Input extends Component {
           onChange={this.handleChange}
           onClick={this.handleClick}
           onFocus={this.handleFocus}
-          type={this.props.type}
           placeholder={this.props.placeholder || ""}
+          type={this.props.type}
+          value={this.state.value}
         />
     }
     if (this.props.type === 'text') {

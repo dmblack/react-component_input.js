@@ -183,6 +183,21 @@ it("accepts, and renders, name property text - control (ensures no false positiv
   expect(name.length).toEqual(0);
 });
 
+it ("accepts, and renders, value text", () => {
+  const wrapper = shallow(
+    <Input
+      type="text"
+      identifier="testInput"
+      labelContent="Test Input"
+      value="Test Value"
+    />
+  );
+
+  let value = wrapper.find("[value='Test Value']");
+
+  expect(value.length).toEqual(1);
+})
+
 it("accepts, and renders, placeholder property text", () => {
   const wrapper = shallow(
     <Input
