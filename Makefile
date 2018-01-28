@@ -5,7 +5,7 @@ YARN=$(shell which yarn)
 
 BABEL=./node_modules/.bin/babel
 COVERALLS=./node_modules/coveralls/bin/coveralls.js
-REMOTE="git@github.com:dmblack/react-component_input"
+REMOTE="git@github.com:dmblack/react-component_input.js"
 CURRENT_VERSION:=$(shell jq ".version" package.json)
 COVERAGE?=true
 
