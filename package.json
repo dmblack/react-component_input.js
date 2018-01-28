@@ -5,10 +5,10 @@
   "main": "./lib/index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/dmblack/react-component_input.git"
+    "url": "https://github.com/dmblack/react-component_input.js.git"
   },
-  "homepage": "https://github.com/dmblack/react-component_input",
-  "bugs": "https://github.com/dmblack/react-component_input/issues",
+  "homepage": "https://github.com/dmblack/react-component_input.js",
+  "bugs": "https://github.com/dmblack/react-component_input.js/issues",
   "directories": {
     "example": "examples"
   },
