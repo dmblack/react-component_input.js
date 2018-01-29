@@ -58,6 +58,4 @@ typings/
 .env
 
 # Some temporary ignores
-dist/
 docs/
-examples/
