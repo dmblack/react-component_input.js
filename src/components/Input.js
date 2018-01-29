@@ -11,7 +11,7 @@ class Input extends Component {
       initialValue: this.props.initialValue || undefined,
       isValid: false,
       justChanged: false,
-      value: this.props.value || undefined,
+      value: this.props.value || '',
       valueMask: this.props.valueMask || undefined,
     };
 
