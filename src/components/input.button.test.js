@@ -6,6 +6,16 @@ import ReactDOM from "react-dom";
 import { shallow, toEqual } from "enzyme";
 import Input from "./Input";
 
+let minLength = value => {
+  return value.length > 0;
+};
+
+let greaterThanZero = {
+  callback: minLength,
+  validationErrorMessage:
+    "Your input is too short. Expecting anything longer than 0"
+};
+
 it("renders without crashing", () => {
   const div = document.createElement("div");
   ReactDOM.render(
@@ -27,7 +37,7 @@ it("container has appropriate classes", () => {
   const wrapper = shallow(
     <Input type="button" identifier="testInput" labelContent="Test Input" />
   );
-  let container = wrapper.find("[className='input input-container input-button container-untouched  container-nofocus container-invalid']");
+  let container = wrapper.find("[className='input input-container input-button container-untouched container-nofocus']");
 
   expect(container.length).toEqual(1);
 });
@@ -36,7 +46,7 @@ it("container has appropriate classes when over-ridden with single string", () =
   const wrapper = shallow(
     <Input type="button" identifier="testInput" labelContent="Test Input" containerClassNames="reniatnoc"/>
   );
-  let container = wrapper.find("[className='reniatnoc container-untouched  container-nofocus container-invalid']");
+  let container = wrapper.find("[className='reniatnoc container-untouched container-nofocus']");
 
   expect(container.length).toEqual(1);
 });
@@ -45,7 +55,7 @@ it("container has appropriate classes when over-ridden with array of strings", (
   const wrapper = shallow(
     <Input type="button" identifier="testInput" labelContent="Test Input" containerClassNames={["reniatnoc", "reniatno"]}/>
   );
-  let container = wrapper.find("[className='reniatnoc reniatno container-untouched  container-nofocus container-invalid']");
+  let container = wrapper.find("[className='reniatnoc reniatno container-untouched container-nofocus']");
 
   expect(container.length).toEqual(1);
 });
@@ -63,7 +73,7 @@ it("label should have appropraite classes", () => {
   const wrapper = shallow(
     <Input type="button" identifier="testInput" labelContent="Test Input" />
   );
-  let label = wrapper.find("[className='input input-label label-untouched  label-invalid']");
+  let label = wrapper.find("[className='label label-container label-button label-untouched label-nofocus']");
 
   expect(label.length).toEqual(1);
 });
@@ -72,7 +82,7 @@ it("label should have appropraite classes when over-ridden with an array of stri
   const wrapper = shallow(
     <Input type="button" identifier="testInput" labelContent="Test Input" labelClassNames={["lebal", "leba"]}/>
   );
-  let label = wrapper.find("[className='lebal leba label-untouched  label-invalid']");
+  let label = wrapper.find("[className='lebal leba label-untouched label-nofocus']");
 
   expect(label.length).toEqual(1);
 });
@@ -81,7 +91,7 @@ it("input should have appropriate classes", () => {
   const wrapper = shallow(
     <Input type="button" identifier="testInput" labelContent="Test Input" />
   );
-  let input = wrapper.find("[className='input input-input input-untouched  input-invalid']");
+  let input = wrapper.find("[className='button button-container input-untouched input-nofocus']");
 
   expect(input.length).toEqual(1);
 });
@@ -90,14 +100,14 @@ it("input should have appropriate classes when over-ridden with an array of stri
   const wrapper = shallow(
     <Input type="button" identifier="testInput" labelContent="Test Input" inputClassNames={["tupni", "tupn"]}/>
   );
-  let input = wrapper.find("[className='tupni tupn input-untouched  input-invalid']");
+  let input = wrapper.find("[className='tupni tupn input-untouched input-nofocus']");
 
   expect(input.length).toEqual(1);
 });
 
 it("should have a html p (validation) element", () => {
   const wrapper = shallow(
-    <Input type="button" identifier="testInput" labelContent="Test Input" />
+    <Input type="button" identifier="testInput" labelContent="Test Input" validation={greaterThanZero} />
   );
   let input = wrapper.find("p");
 
@@ -106,18 +116,18 @@ it("should have a html p (validation) element", () => {
 
 it("p (validation) should have appropriate classes", () => {
   const wrapper = shallow(
-    <Input type="button" identifier="testInput" labelContent="Test Input" />
+    <Input type="button" identifier="testInput" labelContent="Test Input" validation={greaterThanZero} />
   );
-  let input = wrapper.find("[className='input input-validation validation-untouched  validation-invalid']");
+  let input = wrapper.find("[className='validation validation-container validation-button validation-untouched validation-nofocus validation-invalid']");
 
   expect(input.length).toEqual(1);
 });
 
 it("p (validation) should have appropriate classes when over-ridden by an array of strings", () => {
   const wrapper = shallow(
-    <Input type="button" identifier="testInput" labelContent="Test Input" validationClassNames={["noitadilav", "noitadila"]}/>
+    <Input type="button" identifier="testInput" labelContent="Test Input" validation={greaterThanZero} validationClassNames={["noitadilav", "noitadila"]}/>
   );
-  let input = wrapper.find("[className='noitadilav noitadila validation-untouched  validation-invalid']");
+  let input = wrapper.find("[className='noitadilav noitadila validation-untouched validation-nofocus validation-invalid']");
 
   expect(input.length).toEqual(1);
 });

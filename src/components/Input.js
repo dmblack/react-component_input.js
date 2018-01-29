@@ -7,6 +7,7 @@ class Input extends Component {
 
     this.state = {
       hasChanged: false,
+      hasFocus: false,
       id: this.props.identifier || undefined,
       initialValue: this.props.initialValue || undefined,
       isValid: false,
@@ -97,8 +98,8 @@ class Input extends Component {
     this.handleHasValidation = this.props.validation
       ? this.handleHasValidation.bind(this)
       : () => {
-          return true;
-        };
+        return true;
+      };
 
     // Handle the passed default validation state, if one exists.. Otherwise; default is isValid: false in state.
     if (this.props.validation) {
@@ -114,7 +115,7 @@ class Input extends Component {
     }
   }
 
-  componentDidMount() {
+  componentDidMount () {
     let ourCallbackResult = "";
     switch (typeof this.props.onComponentDidMount) {
       case "function":
@@ -142,7 +143,7 @@ class Input extends Component {
    * Handles blur state change triggered by default react onBlur.
    * @param {React Event} event
    */
-  handleBlur(event) {
+  handleBlur (event) {
     let clonedEvent = Object.assign({}, event);
     this.setState(
       {
@@ -160,7 +161,7 @@ class Input extends Component {
    * Passed from the input control. Be careful to handle the different types of params passed from different input.
    * @param {*} event
    */
-  handleOnBlurCallback(event) {
+  handleOnBlurCallback (event) {
     let ourCallbackResult = "";
     let _this = Object.assign({}, this.state, event);
     switch (typeof this.onBlur) {
@@ -191,7 +192,7 @@ class Input extends Component {
    *  Will also trigger a validation check.
    * @param {React Event} event
    */
-  handleChange(event) {
+  handleChange (event) {
     let clonedEvent = Object.assign({}, event);
 
     let thisValue = null;
@@ -239,7 +240,7 @@ class Input extends Component {
   /**
    * @param {*} event - Passed from the input control. Be careful to handle the different types of params passed from different input.
    */
-  handleOnChangeCallback(event) {
+  handleOnChangeCallback (event) {
     let ourCallbackResult = "";
     let _this = Object.assign({}, this.state, event);
     switch (typeof this.onChange) {
@@ -268,13 +269,13 @@ class Input extends Component {
    * Triggered by React onClick event.
    * @param {React Event} event
    */
-  handleClick(event) {
+  handleClick (event) {
     let clonedEvent = Object.assign({}, event);
 
     // We need a button handler, as this is the only way to which this input type has 'changed'.
     if (this.props.type === 'button') {
       this.handleChange(clonedEvent);
-    } 
+    }
     this.setState(
       {
         wasClicked: true
@@ -290,7 +291,7 @@ class Input extends Component {
   /**
    * @param {*} event - Passed from the input control. Be careful to handle the different types of params passed from different input.
    */
-  handleOnClickCallback(event) {
+  handleOnClickCallback (event) {
     let ourCallbackResult = "";
     let _this = Object.assign({}, this.state, event);
     switch (typeof this.onClick) {
@@ -315,7 +316,7 @@ class Input extends Component {
     }
   }
 
-  handleFocus(event) {
+  handleFocus (event) {
     let clonedEvent = Object.assign({}, event);
     this.setState(
       {
@@ -332,7 +333,7 @@ class Input extends Component {
   /**
    * @param {*} event - Passed from the input control. Be careful to handle the different types of params passed from different input.
    */
-  handleOnFocusCallback(event) {
+  handleOnFocusCallback (event) {
     let ourCallbackResult = "";
     let _this = Object.assign({}, this.state, event);
     switch (typeof this.onFocus) {
@@ -357,7 +358,7 @@ class Input extends Component {
     }
   }
 
-  handleHasChanged() {
+  handleHasChanged () {
     if (!this.state.hasChanged) {
       this.setState({
         hasChanged: true
@@ -369,7 +370,7 @@ class Input extends Component {
     });
   }
 
-  handleHasValidation(event) {
+  handleHasValidation (event) {
     let value = undefined;
     switch (this.props.type) {
       case "radio":
@@ -419,62 +420,118 @@ class Input extends Component {
     });
   }
 
-  render() {
-    const containerClassNames = `${
-      this.props.containerClassNames
-        ? `${this.props.containerClassNames instanceof Array
-          ? `${this.props.containerClassNames.join(" ")}`
-          : `${this.props.containerClassNames}`}`
-        : `input input-container input-${this.props.type}`
-    } ${this.state.hasChanged ? `container-touched` : `container-untouched`} ${
-      this.state.justChanged ? `container-justchanged` : ``
-    } ${this.state.hasFocus ? `container-focus` : `container-nofocus`} ${
-      this.state.isValid ? `container-valid` : `container-invalid`
-    }`;
-    const inputClassNames = `${
-      this.props.inputClassNames
-        ? `${this.props.inputClassNames instanceof Array
-          ? `${this.props.inputClassNames.join(" ")}`
-          : `${this.props.inputClassNames}`}`
-      : `input input-input`
-    } ${this.state.hasChanged ? `input-touched` : `input-untouched`} ${
-      this.state.justChanged ? `input-justchanged` : ``
-    } ${this.state.isValid ? `input-valid` : `input-invalid`}`;
-    const labelClassNames = `${
-      this.props.labelClassNames
-        ? `${this.props.labelClassNames instanceof Array
-          ? `${this.props.labelClassNames.join(" ")}`
-          : `${this.props.labelClassNames}`}`
-      : `input input-label`
-    } ${this.state.hasChanged ? `label-touched` : `label-untouched`} ${
-      this.state.justChanged ? `label-justchanged` : ``
-    } ${this.state.isValid ? `label-valid` : `label-invalid`}`;
-    const validationClassNames = `${
-      this.props.validationClassNames
-        ? `${this.props.validationClassNames instanceof Array
-          ? `${this.props.validationClassNames.join(" ")}`
-          : `${this.props.validationClassNames}`}`
-      : `input input-validation`
-    } ${
-      this.state.hasChanged ? `validation-touched` : `validation-untouched`
-    } ${this.state.justChanged ? `validation-justchanged` : ``} ${
-      this.state.isValid ? `validation-valid` : `validation-invalid`
-    }`;
+  render () {
+    let containerClassNames = '';
+    let inputClassNames = '';
+    let labelClassNames = '';
+    let validationClassNames = '';
+
+    if (this.props.containerClassNames) {
+      if (this.props.containerClassNames instanceof Array) {
+        containerClassNames += `${this.props.containerClassNames.join(' ')}`
+      } else {
+        containerClassNames += `${this.props.containerClassNames}`
+      }
+    } else {
+      containerClassNames += `input input-container input-${this.props.type}`;
+    }
+
+    if (this.props.inputClassNames) {
+      if (this.props.inputClassNames instanceof Array) {
+        inputClassNames += `${this.props.inputClassNames.join(' ')}`
+      } else {
+        inputClassNames += `${this.props.inputClassNames}`
+      }
+    } else {
+      inputClassNames += `${this.props.type} ${this.props.type}-container`;
+    }
+
+    if (this.props.labelClassNames) {
+      if (this.props.labelClassNames instanceof Array) {
+        labelClassNames += `${this.props.labelClassNames.join(' ')}`
+      } else {
+        labelClassNames += `${this.props.labelClassNames}`
+      }
+    } else {
+      labelClassNames += `label label-container label-${this.props.type}`;
+    }
+
+    if (this.props.validationClassNames) {
+      if (this.props.validationClassNames instanceof Array) {
+        validationClassNames += `${this.props.validationClassNames.join(' ')}`
+      } else {
+        validationClassNames += `${this.props.validationClassNames}`
+      }
+    } else {
+      validationClassNames += `validation validation-container validation-${this.props.type}`;
+    }
+
+    if (this.state.hasChanged) {
+      containerClassNames += ` container-touched`;
+      inputClassNames += ' input-touched';
+      labelClassNames += ' label-touched';
+      validationClassNames += ' validation-touched';
+    } else {
+      containerClassNames += ' container-untouched';
+      inputClassNames += ' input-untouched'
+      labelClassNames += ' label-untouched';
+      validationClassNames += ' validation-untouched';
+    }
+
+    if (this.state.justChanged) {
+      containerClassNames += ' container-justchanged';
+      inputClassNames += ' input-justchanged';
+      labelClassNames += ' label-justchanged';
+      validationClassNames += ' validation-justchanged';
+    }
+
+    if (this.state.hasFocus) {
+      containerClassNames += ' container-focus';
+      inputClassNames += ' input-focus';
+      labelClassNames += ' label-focus';
+      validationClassNames += ' validation-focus';
+    } else {
+      containerClassNames += ' container-nofocus';
+      inputClassNames += ' input-nofocus'
+      labelClassNames += ' label-nofocus';
+      validationClassNames += ' validation-nofocus';
+    }
+
+    if (this.props.validation) {
+      if (this.state.isValid) {
+        containerClassNames += ' container-valid';
+        inputClassNames += ' input-valid';
+        labelClassNames += ' label-valid';
+        validationClassNames += ' validation-valid';
+      } else {
+        containerClassNames += ' container-invalid';
+        inputClassNames += ' input-invalid'
+        labelClassNames += ' label-invalid';
+        validationClassNames += ' validation-invalid';
+      }
+    }
+
+    let thisValidation = null;
+    if (this.props.validation) {
+      thisValidation = <p className={validationClassNames}>
+        {this.state.validationErrorMessage || "invalid"}
+      </p>
+    }
 
     let thisInput = <p>Unsupported Input</p>
     switch (this.props.type) {
       case 'button':
-      thisInput = <input
-        className={inputClassNames}
-        id={this.props.identifier}
-        name={this.props.name || this.props.identifier}
-        onBlur={this.handleBlur}
-        onChange={this.handleChange}
-        onClick={this.handleClick}
-        onFocus={this.handleFocus}
-        type={this.props.type}
-        value={this.state.value}
-      />
+        thisInput = <input
+          className={inputClassNames}
+          id={this.props.identifier}
+          name={this.props.name || this.props.identifier}
+          onBlur={this.handleBlur}
+          onChange={this.handleChange}
+          onClick={this.handleClick}
+          onFocus={this.handleFocus}
+          type={this.props.type}
+          value={this.state.value}
+        />
 
       case 'radio':
         thisInput = <input
@@ -488,7 +545,7 @@ class Input extends Component {
           type={this.props.type}
         />
 
-      case 'text': 
+      case 'text':
         thisInput = <input
           className={inputClassNames}
           id={this.props.identifier}
@@ -532,9 +589,6 @@ class Input extends Component {
           value={this.state.value}
         />
     }
-    if (this.props.type === 'text') {
-
-    }
 
     return (
       <div className={containerClassNames}>
@@ -542,9 +596,7 @@ class Input extends Component {
           {this.props.labelContent}
         </label>
         {thisInput}
-        <p className={validationClassNames}>
-          {this.state.validationErrorMessage || "invalid"}
-        </p>
+        {thisValidation}
       </div>
     );
   }
