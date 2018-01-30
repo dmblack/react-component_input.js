@@ -4,7 +4,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { shallow, toEqual } from "enzyme";
-import Input from "./Input";
+import Input from "./../src";
 
 let maxLength = value => {
  return value.length <= 10;

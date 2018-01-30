@@ -7,6 +7,10 @@ commonConfig.devtool = 'inline-source-map';
 
 commonConfig.module.rules.unshift({
   test: /\.js$/,
+  exclude: [
+    /node_modules/,
+    /\.test\.js?$/
+  ],
   use: { loader: 'istanbul-instrumenter-loader' },
   enforce: 'post',
   include: path.resolve(__dirname, './src')
