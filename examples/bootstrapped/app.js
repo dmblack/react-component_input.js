@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import Input from 'react-component_input';
+import Button from './button';
+import Radio from './radio';
 import TextExample from './text';
 import Textarea from './textarea';
 
 const appElement = document.getElementById('example');
 
 const examples = [
+  Button,
+  Radio,
   TextExample,
   Textarea
 ];
@@ -14,7 +18,7 @@ const examples = [
 class App extends Component {
   render() {
     return (
-      <div>
+      <div class="form-group">
         {examples.map((example, key) => {
           const ExampleApp = example.app;
           return (

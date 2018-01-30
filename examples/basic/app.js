@@ -1,20 +1,18 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import Input from 'react-component_input';
+import Button from './button';
+import Radio from './radio';
 import TextExample from './text';
 import Textarea from './textarea';
-// import Forms from './forms';
-// import ReactRouter from './react-router';
-// import NestedInputs from './nested_inputs';
 
 const appElement = document.getElementById('example');
 
 const examples = [
+  Button,
+  Radio,
   TextExample,
   Textarea
-//   MultipleInputs,
-//   NestedInputs,
-//   ReactRouter
 ];
 
 class App extends Component {
