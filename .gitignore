@@ -57,5 +57,10 @@ typings/
 # dotenv environment variables file
 .env
 
+# Some example specifics
+examples/**/*-bundle.js
+examples/__build__
+
 # Some temporary ignores
-docs/
+docs
+lib
