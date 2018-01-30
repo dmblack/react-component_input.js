@@ -2,7 +2,8 @@
 
 An input component to serve the common good.
 
-[![Build Status](https://travis-ci.org/dmblack/react-component_input.js.svg?branch=master)](https://travis-ci.org/dmblack/react-component_input.js)
+[![Build Status](https://travis-ci.org/dmblack/react-component_input.js.svg?branch=master)](https://travis-ci.org/dmblack/react-component_input.js?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/dmblack/react-component_input.js/badge.svg?branch=master)](https://coveralls.io/github/dmblack/react-component_input.js?branch=master)
 
 ## Table of Contents
 
