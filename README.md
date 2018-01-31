@@ -143,7 +143,7 @@ export default App;
 
 ## Validation
 For those interested in why this is included, please also see:
-[Notes On Validation](#validation%20notes)
+[Notes On Validation](#validation-notes)
 
 Validation is a, or an array of, objects which contain a 'callback', and 
 validation error message. This object is provided to the component via the
