@@ -77,6 +77,7 @@ A basic example may be;
 (Mostly asked by myself, to myself)
 
 * Why does this component even exist?
+
 Initially developing an application heavily dependent on HTML 'Input' elements,
 I was quickly overwhelmed with the vast options of options available on NPM.
 These options, whilst not opinionated, often didn't quite meet my requirements,
@@ -89,6 +90,7 @@ it rather hard to conveniently include in other projects. Work invested in copy
 Thus; react-component_input.js was born
 
 * Goals of this Project
+
 The goal of this project is to provide a 'core'/'key' feature functional input
 component that performs nothing outside of that scope. These should also provide
 appropriate functionality that is exposed by React (Otherwise; what would be the
