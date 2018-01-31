@@ -15,7 +15,7 @@
   "scripts": {
     "start": "./node_modules/.bin/webpack-dev-server --inline --host 127.0.0.1 --content-base examples/",
     "test": "cross-env NODE_ENV=test jest",
-    "lint": "eslint src/ specs/"
+    "lint": "eslint src/"
   },
   "authors": [
     "Dustyn Blackmore"

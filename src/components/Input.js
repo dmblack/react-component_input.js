@@ -9,11 +9,10 @@ class Input extends Component {
       hasChanged: false,
       hasFocus: false,
       id: this.props.identifier || undefined,
-      initialValue: this.props.initialValue || undefined,
       isValid: false,
       justChanged: false,
-      value: this.props.value || '',
-      valueMask: this.props.valueMask || undefined,
+      value: this.props.value || "",
+      valueMask: this.props.valueMask || undefined
     };
 
     // onBlur
@@ -97,11 +96,10 @@ class Input extends Component {
     // Handles validations (if exists)
     this.handleHasValidation = this.props.validation
       ? this.handleHasValidation.bind(this)
-      : () => {
-        return true;
-      };
+      : () => true;
 
-    // Handle the passed default validation state, if one exists.. Otherwise; default is isValid: false in state.
+    // Handle the passed default validation state, if one exists.. Otherwise;
+    //  default is isValid: false in state.
     if (this.props.validation) {
       if (this.props.validation.isArray) {
         let isValidArray = this.props.validation.map(x => {
@@ -115,7 +113,7 @@ class Input extends Component {
     }
   }
 
-  componentDidMount () {
+  componentDidMount() {
     let ourCallbackResult = "";
     switch (typeof this.props.onComponentDidMount) {
       case "function":
@@ -143,7 +141,7 @@ class Input extends Component {
    * Handles blur state change triggered by default react onBlur.
    * @param {React Event} event
    */
-  handleBlur (event) {
+  handleBlur(event) {
     let clonedEvent = Object.assign({}, event);
     this.setState(
       {
@@ -158,10 +156,11 @@ class Input extends Component {
   }
 
   /**
-   * Passed from the input control. Be careful to handle the different types of params passed from different input.
+   * Passed from the input control. Be careful to handle the different types of
+   *  params passed from different input.
    * @param {*} event
    */
-  handleOnBlurCallback (event) {
+  handleOnBlurCallback(event) {
     let ourCallbackResult = "";
     let _this = Object.assign({}, this.state, event);
     switch (typeof this.onBlur) {
@@ -187,27 +186,28 @@ class Input extends Component {
   }
 
   /**
-   * handleChange - Triggered when the input is modified in any way, expecting a react event.
+   * handleChange - Triggered when the input is modified in any way, expecting
+   *  a react event.
    *  Will also trigger onChange prop.
    *  Will also trigger a validation check.
    * @param {React Event} event
    */
-  handleChange (event) {
+  handleChange(event) {
     let clonedEvent = Object.assign({}, event);
 
     let thisValue = null;
 
     switch (this.props.type) {
-      case 'button':
+      case "button":
         thisValue = clonedEvent.target.value;
         break;
-      case 'radio':
+      case "radio":
         thisValue = clonedEvent.target.value;
         break;
-      case 'text':
+      case "text":
         thisValue = clonedEvent.target.value;
         break;
-      case 'textarea':
+      case "textarea":
         thisValue = clonedEvent.target.value;
         break;
       default:
@@ -238,9 +238,10 @@ class Input extends Component {
   }
 
   /**
-   * @param {*} event - Passed from the input control. Be careful to handle the different types of params passed from different input.
+   * @param {*} event - Passed from the input control. Be careful to handle the
+   *  different types of params passed from different input.
    */
-  handleOnChangeCallback (event) {
+  handleOnChangeCallback(event) {
     let ourCallbackResult = "";
     let _this = Object.assign({}, this.state, event);
     switch (typeof this.onChange) {
@@ -269,11 +270,12 @@ class Input extends Component {
    * Triggered by React onClick event.
    * @param {React Event} event
    */
-  handleClick (event) {
+  handleClick(event) {
     let clonedEvent = Object.assign({}, event);
 
-    // We need a button handler, as this is the only way to which this input type has 'changed'.
-    if (this.props.type === 'button') {
+    // We need a button handler, as this is the only way to which this input
+    //  type has 'changed'.
+    if (this.props.type === "button") {
       this.handleChange(clonedEvent);
     }
     this.setState(
@@ -289,9 +291,10 @@ class Input extends Component {
   }
 
   /**
-   * @param {*} event - Passed from the input control. Be careful to handle the different types of params passed from different input.
+   * @param {*} event - Passed from the input control. Be careful to handle the
+   *  different types of params passed from different input.
    */
-  handleOnClickCallback (event) {
+  handleOnClickCallback(event) {
     let ourCallbackResult = "";
     let _this = Object.assign({}, this.state, event);
     switch (typeof this.onClick) {
@@ -316,7 +319,7 @@ class Input extends Component {
     }
   }
 
-  handleFocus (event) {
+  handleFocus(event) {
     let clonedEvent = Object.assign({}, event);
     this.setState(
       {
@@ -331,9 +334,10 @@ class Input extends Component {
   }
 
   /**
-   * @param {*} event - Passed from the input control. Be careful to handle the different types of params passed from different input.
+   * @param {*} event - Passed from the input control. Be careful to handle the
+   *  different types of params passed from different input.
    */
-  handleOnFocusCallback (event) {
+  handleOnFocusCallback(event) {
     let ourCallbackResult = "";
     let _this = Object.assign({}, this.state, event);
     switch (typeof this.onFocus) {
@@ -358,7 +362,7 @@ class Input extends Component {
     }
   }
 
-  handleHasChanged () {
+  handleHasChanged() {
     if (!this.state.hasChanged) {
       this.setState({
         hasChanged: true
@@ -370,7 +374,7 @@ class Input extends Component {
     });
   }
 
-  handleHasValidation (event) {
+  handleHasValidation(event) {
     let value = undefined;
     switch (this.props.type) {
       case "radio":
@@ -420,17 +424,17 @@ class Input extends Component {
     });
   }
 
-  render () {
-    let containerClassNames = '';
-    let inputClassNames = '';
-    let labelClassNames = '';
-    let validationClassNames = '';
+  render() {
+    let containerClassNames = "";
+    let inputClassNames = "";
+    let labelClassNames = "";
+    let validationClassNames = "";
 
     if (this.props.containerClassNames) {
       if (this.props.containerClassNames instanceof Array) {
-        containerClassNames += `${this.props.containerClassNames.join(' ')}`
+        containerClassNames += `${this.props.containerClassNames.join(" ")}`;
       } else {
-        containerClassNames += `${this.props.containerClassNames}`
+        containerClassNames += `${this.props.containerClassNames}`;
       }
     } else {
       containerClassNames += `input input-container input-${this.props.type}`;
@@ -438,9 +442,9 @@ class Input extends Component {
 
     if (this.props.inputClassNames) {
       if (this.props.inputClassNames instanceof Array) {
-        inputClassNames += `${this.props.inputClassNames.join(' ')}`
+        inputClassNames += `${this.props.inputClassNames.join(" ")}`;
       } else {
-        inputClassNames += `${this.props.inputClassNames}`
+        inputClassNames += `${this.props.inputClassNames}`;
       }
     } else {
       inputClassNames += `${this.props.type} ${this.props.type}-container`;
@@ -448,9 +452,9 @@ class Input extends Component {
 
     if (this.props.labelClassNames) {
       if (this.props.labelClassNames instanceof Array) {
-        labelClassNames += `${this.props.labelClassNames.join(' ')}`
+        labelClassNames += `${this.props.labelClassNames.join(" ")}`;
       } else {
-        labelClassNames += `${this.props.labelClassNames}`
+        labelClassNames += `${this.props.labelClassNames}`;
       }
     } else {
       labelClassNames += `label label-container label-${this.props.type}`;
@@ -458,136 +462,155 @@ class Input extends Component {
 
     if (this.props.validationClassNames) {
       if (this.props.validationClassNames instanceof Array) {
-        validationClassNames += `${this.props.validationClassNames.join(' ')}`
+        validationClassNames += `${this.props.validationClassNames.join(" ")}`;
       } else {
-        validationClassNames += `${this.props.validationClassNames}`
+        validationClassNames += `${this.props.validationClassNames}`;
       }
     } else {
-      validationClassNames += `validation validation-container validation-${this.props.type}`;
+      validationClassNames += `validation validation-container validation-${
+        this.props.type
+      }`;
     }
 
     if (this.state.hasChanged) {
       containerClassNames += ` container-touched`;
-      inputClassNames += ' input-touched';
-      labelClassNames += ' label-touched';
-      validationClassNames += ' validation-touched';
+      inputClassNames += " input-touched";
+      labelClassNames += " label-touched";
+      validationClassNames += " validation-touched";
     } else {
-      containerClassNames += ' container-untouched';
-      inputClassNames += ' input-untouched'
-      labelClassNames += ' label-untouched';
-      validationClassNames += ' validation-untouched';
+      containerClassNames += " container-untouched";
+      inputClassNames += " input-untouched";
+      labelClassNames += " label-untouched";
+      validationClassNames += " validation-untouched";
     }
 
     if (this.state.justChanged) {
-      containerClassNames += ' container-justchanged';
-      inputClassNames += ' input-justchanged';
-      labelClassNames += ' label-justchanged';
-      validationClassNames += ' validation-justchanged';
+      containerClassNames += " container-justchanged";
+      inputClassNames += " input-justchanged";
+      labelClassNames += " label-justchanged";
+      validationClassNames += " validation-justchanged";
     }
 
     if (this.state.hasFocus) {
-      containerClassNames += ' container-focus';
-      inputClassNames += ' input-focus';
-      labelClassNames += ' label-focus';
-      validationClassNames += ' validation-focus';
+      containerClassNames += " container-focus";
+      inputClassNames += " input-focus";
+      labelClassNames += " label-focus";
+      validationClassNames += " validation-focus";
     } else {
-      containerClassNames += ' container-nofocus';
-      inputClassNames += ' input-nofocus'
-      labelClassNames += ' label-nofocus';
-      validationClassNames += ' validation-nofocus';
+      containerClassNames += " container-nofocus";
+      inputClassNames += " input-nofocus";
+      labelClassNames += " label-nofocus";
+      validationClassNames += " validation-nofocus";
     }
 
     if (this.props.validation) {
       if (this.state.isValid) {
-        containerClassNames += ' container-valid';
-        inputClassNames += ' input-valid';
-        labelClassNames += ' label-valid';
-        validationClassNames += ' validation-valid';
+        containerClassNames += " container-valid";
+        inputClassNames += " input-valid";
+        labelClassNames += " label-valid";
+        validationClassNames += " validation-valid";
       } else {
-        containerClassNames += ' container-invalid';
-        inputClassNames += ' input-invalid'
-        labelClassNames += ' label-invalid';
-        validationClassNames += ' validation-invalid';
+        containerClassNames += " container-invalid";
+        inputClassNames += " input-invalid";
+        labelClassNames += " label-invalid";
+        validationClassNames += " validation-invalid";
       }
     }
 
     let thisValidation = null;
     if (this.props.validation) {
-      thisValidation = <p className={validationClassNames}>
-        {this.state.validationErrorMessage || "invalid"}
-      </p>
+      thisValidation = (
+        <p className={validationClassNames}>
+          {this.state.validationErrorMessage || "invalid"}
+        </p>
+      );
     }
 
-    let thisInput = <p>Unsupported Input</p>
+    let thisInput = <p>Unsupported Input</p>;
     switch (this.props.type) {
-      case 'button':
-        thisInput = <input
-          className={inputClassNames}
-          id={this.props.identifier}
-          name={this.props.name || this.props.identifier}
-          onBlur={this.handleBlur}
-          onChange={this.handleChange}
-          onClick={this.handleClick}
-          onFocus={this.handleFocus}
-          type={this.props.type}
-          value={this.state.value}
-        />
-
-      case 'radio':
-        thisInput = <input
-          className={inputClassNames}
-          id={this.props.identifier}
-          name={this.props.name || this.props.identifier}
-          onBlur={this.handleBlur}
-          onChange={this.handleChange}
-          onClick={this.handleClick}
-          onFocus={this.handleFocus}
-          type={this.props.type}
-        />
-
-      case 'text':
-        thisInput = <input
-          className={inputClassNames}
-          id={this.props.identifier}
-          name={this.props.name || this.props.identifier}
-          onBlur={this.handleBlur}
-          onChange={this.handleChange}
-          onClick={this.handleClick}
-          onFocus={this.handleFocus}
-          placeholder={this.props.placeholder || ""}
-          type={this.props.type}
-          value={this.state.value}
-        />
+      case "button":
+        thisInput = (
+          <input
+            className={inputClassNames}
+            id={this.props.identifier}
+            name={this.props.name || this.props.identifier}
+            onBlur={this.handleBlur}
+            onChange={this.handleChange}
+            onClick={this.handleClick}
+            onFocus={this.handleFocus}
+            placeholder={this.props.placeholder || ""}
+            type={this.props.type}
+            value={this.state.value}
+          />
+        );
         break;
 
-      case 'textarea':
-        thisInput = <textarea
-          className={inputClassNames}
-          id={this.props.identifier}
-          name={this.props.name || this.props.identifier}
-          onBlur={this.handleBlur}
-          onChange={this.handleChange}
-          onClick={this.handleClick}
-          onFocus={this.handleFocus}
-          placeholder={this.props.placeholder || ""}
-          type={this.props.type}
-          value={this.state.value}
-        />
+      case "radio":
+        thisInput = (
+          <input
+            className={inputClassNames}
+            id={this.props.identifier}
+            name={this.props.name || this.props.identifier}
+            onBlur={this.handleBlur}
+            onChange={this.handleChange}
+            onClick={this.handleClick}
+            onFocus={this.handleFocus}
+            placeholder={this.props.placeholder || ""}
+            type={this.props.type}
+          />
+        );
+        break;
+
+      case "text":
+        thisInput = (
+          <input
+            className={inputClassNames}
+            id={this.props.identifier}
+            name={this.props.name || this.props.identifier}
+            onBlur={this.handleBlur}
+            onChange={this.handleChange}
+            onClick={this.handleClick}
+            onFocus={this.handleFocus}
+            placeholder={this.props.placeholder || ""}
+            type={this.props.type}
+            value={this.state.value}
+          />
+        );
+        break;
+
+      case "textarea":
+        thisInput = (
+          <textarea
+            className={inputClassNames}
+            id={this.props.identifier}
+            name={this.props.name || this.props.identifier}
+            onBlur={this.handleBlur}
+            onChange={this.handleChange}
+            onClick={this.handleClick}
+            onFocus={this.handleFocus}
+            placeholder={this.props.placeholder || ""}
+            type={this.props.type}
+            value={this.state.value}
+          />
+        );
         break;
 
       default:
-        thisInput = <input
-          className={inputClassNames}
-          id={this.props.identifier}
-          name={this.props.name || this.props.identifier}
-          onBlur={this.handleBlur}
-          onChange={this.handleChange}
-          onClick={this.handleClick}
-          onFocus={this.handleFocus}
-          placeholder={this.props.placeholder || ""}
-          type={this.props.type}
-          value={this.state.value}
-        />
+        thisInput = (
+          <input
+            className={inputClassNames}
+            id={this.props.identifier}
+            name={this.props.name || this.props.identifier}
+            onBlur={this.handleBlur}
+            onChange={this.handleChange}
+            onClick={this.handleClick}
+            onFocus={this.handleFocus}
+            placeholder={this.props.placeholder || ""}
+            type={this.props.type}
+            value={this.state.value}
+          />
+        );
+        break;
     }
 
     return (
@@ -610,60 +633,72 @@ Input.propTypes = {
   ]),
   /** Defines the HTML ID applied to the input (Required). */
   identifier: PropTypes.string.isRequired,
-  /** An input class names override for the input. Expects a, or array of, string. */
+  /** An input class names override for the input. Expects a, or array of,
+   * string. */
   inputClassNames: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.string),
     PropTypes.string
   ]),
-  /** A label class names override for the input. Expects a, or array of, string. */
+  /** A label class names override for the input. Expects a, or array of,
+   * string. */
   labelClassNames: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.string),
     PropTypes.string
   ]),
-  /** A label for your input. Labels can be styled with the label-<criteria> selector, unless override from labelClassNames prop */
+  /** A label for your input. Labels can be styled with the label-<criteria>
+   * selector, unless override from labelClassNames prop */
   labelContent: PropTypes.string.isRequired,
   /** A name object, applied to the input at a HTML level. */
   name: PropTypes.string,
-  /** An onChange callback. The React event object is passed. Expects a function, or array of functions. */
+  /** An onChange callback. The React event object is passed. Expects a
+   * function, or array of functions. */
   onChange: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.func),
     PropTypes.func
   ]),
-  /** An onClick callback. The React event object is passed. Expects a function, or array of functions. */
+  /** An onClick callback. The React event object is passed. Expects a
+   * function, or array of functions. */
   onClick: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.func),
     PropTypes.func
   ]),
-  /** An onComponentDidMount callback. The React event object is passed. Expects a function, or array of functions. */
+  /** An onComponentDidMount callback. The React event object is passed.
+   * Expects a function, or array of functions. */
   onComponentDidMount: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.func),
     PropTypes.func
   ]),
-  /** An onFocus callback. The React event object is passed. Expects a function, or array of functions. */
+  /** An onFocus callback. The React event object is passed. Expects a
+   * function, or array of functions. */
   onFocus: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.func),
     PropTypes.func
   ]),
-  /** An onBlur (or React: onBlur) callback. The React event object is passed. Expects a function, or array of functions. */
+  /** An onBlur (or React: onBlur) callback. The React event object is passed.
+   * Expects a function, or array of functions. */
   onBlur: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.func),
     PropTypes.func
   ]),
   placeholder: PropTypes.string,
   type: PropTypes.string.isRequired,
-  /** A validation class names override - defaults to "validation-<criteria>". Expects a string, or array of strings */
+  /** A validation class names override - defaults to "validation-<criteria>".
+   * Expects a string, or array of strings */
   validationClassNames: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.string),
     PropTypes.string
   ]),
   /**
-   * Validation expect an object, or array of objects, with "callback", and "validationState" required properties.
-   *  I"ve chosen to supply an isolated property to appropriately abstract, yet "contain" all the states of Validation.
+   * Validation expect an object, or array of objects, with "callback", and
+   * "validationState" required properties. I've chosen to supply an isolated
+   * property to appropriately abstract, yet "contain" all the states of
+   * Validation.
    */
   validation: PropTypes.oneOfType([
     PropTypes.arrayOf(
       PropTypes.shape({
-        /** A react event object is passed to your callback function for your validation */
+        /** A react event object is passed to your callback function for your
+         * validation */
         callback: PropTypes.func.isRequired,
         /** Store the error message for this input failing validation */
         errorMessage: PropTypes.string.isRequired,
@@ -672,7 +707,8 @@ Input.propTypes = {
       })
     ),
     PropTypes.shape({
-      /** A react event object is passed to your callback function for your validation */
+      /** A react event object is passed to your callback function for your
+       * validation */
       callback: PropTypes.func.isRequired,
       /** Store the error message for this input failing validation */
       errorMessage: PropTypes.string.isRequired,
@@ -684,7 +720,8 @@ Input.propTypes = {
   /**
    * valueMask: {string}
    *
-   *  An opportunity to mask the return value supplied by the input. Replaces {{value}} with the actual value of the input.
+   *  An opportunity to mask the return value supplied by the input. Replaces
+   * {{value}} with the actual value of the input.
    *    An example may be;
    *    "First Name: {{value}}".
    *
