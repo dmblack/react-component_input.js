@@ -9,7 +9,7 @@ class Input extends Component {
       hasChanged: false,
       hasFocus: false,
       id: this.props.identifier || undefined,
-      isValid: false,
+      isValid: this.props.validation ? false : true,
       justChanged: false,
       value: this.props.value || "",
       valueMask: this.props.valueMask || undefined
