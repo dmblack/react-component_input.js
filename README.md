@@ -13,6 +13,9 @@ An input component to serve the common good.
 * [FAQ](#FAQ)
 * [Examples](#examples)
 
+Additionally, you can check out one of the key features here;
+* [Validation](#validation)
+
 ## Installation
 
 To install, you can use [npm](https://npmjs.org/) or [yarn](https://yarnpkg.com):
@@ -137,28 +140,16 @@ export default App;
 ```
 
 ## Validation
-Oh gosh; how I wanted to/will eventually leave this out of the component. In its
-current state; this is an inbuilt and entirely custom to component feature. 
-Validation, in it's pure form; isn't really built into HTML Inputs, nor should
-it ever be purely depended on for any form of 'backend' processing. 
-
-For now; the behavior was included to provide exposure to the validation
-error.
-
-See; https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input
-
-So.. for now, against my personal preference, and the project goals; it's
-included.
-
-This is how it works;
+For those interested in why this is included, please also see:
+[Notes On Validation](#validation%20notes)
 
 Validation is a, or an array of, objects which contain a 'callback', and 
 validation error message. This object is provided to the component via the
 'validation' prop.
 
 The callback functions are passed the value of the triggered input, as
-provided by the (React Event)[https://reactjs.org/docs/handling-events.html].
-The return of the function, true or false, is used to determine the state of the
+provided by the [React Event](https://reactjs.org/docs/handling-events.html).
+The return of the function, (boolean) false or true, is used to determine the state of the
 component. If false; the validation error is rendered. If an array of validation
 is provided, and one fails - the component fails validation, however; only the
 failing validation object error message is shown.
@@ -190,3 +181,14 @@ As stated, as an array;
 ```jsx
   validation={[validMaxLength(32), validMinLength(10)]}
 ```
+
+## Validation Notes
+Oh gosh; how I wanted to/will eventually leave this out of the component. In its
+current state; this is an inbuilt and entirely custom to component feature. 
+Validation, in it's pure form; isn't really built into HTML Inputs, nor should
+it ever be purely depended on for any form of 'backend' processing. 
+
+For now; the behavior was included to provide exposure to the validation
+error.
+
+See; https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input
