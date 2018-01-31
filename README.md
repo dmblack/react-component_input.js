@@ -145,16 +145,28 @@ export default App;
 For those interested in why this is included, please also see:
 [Notes On Validation](#validation-notes)
 
-Validation is a, or an array of, objects which contain a 'callback', and 
-validation error message. This object is provided to the component via the
-'validation' prop.
+* How-To / Overview:
 
-The callback functions are passed the value of the triggered input, as
+Validation is an, or an array of, object(s). These objects contain two
+properties; callback, and errorMessage. This object is provided to the component
+via the 'validation' prop.
+
+* How It Works:
+
+Validation is handled during the React onChange event, not to be confused with
+the 'onChangeCallback' prop (Which is also called during the React onChange
+event).
+
+The callback function is called with the value of the associated input, as
 provided by the [React Event](https://reactjs.org/docs/handling-events.html).
-The return of the function, (boolean) false or true, is used to determine the state of the
-component. If false; the validation error is rendered. If an array of validation
-is provided, and one fails - the component fails validation, however; only the
-failing validation object error message is shown.
+The return result of this function, boolean, then reflects the validity of the
+input.
+
+Additionally; If an array of validation is provided, and only one of many fail;
+the component entirely fails validation. Finally, in this case; only the failing
+validation error message is rendered.
+
+* Example:
 
 An example validation object may be;
 
