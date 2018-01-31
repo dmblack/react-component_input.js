@@ -27,14 +27,23 @@ Please update the README with any API changes, the code and docs should
 always be in sync.
 
 ### Development
+Note: Personally:  I have been using yarn due to inconsistent, or unreliable,
+behavior with NPM.
 
 - `npm start` runs the dev server to run/develop examples
+- `yarn start`
 - `npm test` will run the tests.
-- `scripts/test` same as `npm test` but keeps karma running and watches
-  for changes
+- `yarn test`
 
 ### Build
 
 Please do not include the output of `scripts/build` in your commits, we
 only do this when we release. (Also, you probably don't need to build
 anyway unless you are fixing something around our global build.)
+
+### Coding Requirements / Standards
+
+I'm working on finalizing / ensuring these are part of the actual local build/
+test phase - to which I am not even entirely compliant.
+
+For now; there is a built in lint, which appears to conform to semistandard.

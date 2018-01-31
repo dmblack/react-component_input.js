@@ -10,6 +10,7 @@ An input component to serve the common good.
 * [Installation](#installation)
 * [Usage](#usage)
 * [Styles](#styles)
+* [FAQ](#FAQ)
 * [Examples](#examples)
 
 ## Installation
@@ -69,6 +70,32 @@ A basic example may be;
 }
 ```
 
+## FAQ
+(Mostly asked by myself, to myself)
+
+* Why does this component even exist?
+Initially developing an application heavily dependent on HTML 'Input' elements,
+I was quickly overwhelmed with the vast options of options available on NPM.
+These options, whilst not opinionated, often didn't quite meet my requirements,
+which I felt really were 'core' and 'key' features of an input.
+
+In working on this app, I developed my own (app specific) child component, made
+it rather hard to conveniently include in other projects. Work invested in copy
+/ paste quickly became tedious (And the wrong way to manage things anyway).
+
+Thus; react-component_input.js was born
+
+* Goals of this Project
+The goal of this project is to provide a 'core'/'key' feature functional input
+component that performs nothing outside of that scope. These should also provide
+appropriate functionality that is exposed by React (Otherwise; what would be the
+point of making this a react component, right?)
+
+Overall; this is one of the reasons styles are completely abstract from the
+project.
+
+Yes.. Yes. It's not perfect.. :( See... [Validation](#Validation)
+
 ## Examples
 
 Inside an app:
@@ -107,4 +134,59 @@ class App extends Component {
 }
 
 export default App;
+```
+
+## Validation
+Oh gosh; how I wanted to/will eventually leave this out of the component. In its
+current state; this is an inbuilt and entirely custom to component feature. 
+Validation, in it's pure form; isn't really built into HTML Inputs, nor should
+it ever be purely depended on for any form of 'backend' processing. 
+
+For now; the behavior was included to provide exposure to the validation
+error.
+
+See; https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input
+
+So.. for now, against my personal preference, and the project goals; it's
+included.
+
+This is how it works;
+
+Validation is a, or an array of, objects which contain a 'callback', and 
+validation error message. This object is provided to the component via the
+'validation' prop.
+
+The callback functions are passed the value of the triggered input, as
+provided by the (React Event)[https://reactjs.org/docs/handling-events.html].
+The return of the function, true or false, is used to determine the state of the
+component. If false; the validation error is rendered. If an array of validation
+is provided, and one fails - the component fails validation, however; only the
+failing validation object error message is shown.
+
+An example validation object may be;
+
+```js
+let validMinLength = (length = 0) => ({
+  errorMessage:
+    'The length of your input must be more than ' + parseInt(length),
+  callback: value => value.length >= parseInt(length)
+});
+```
+and
+```js
+let validMinLength = (length = 0) => ({
+  errorMessage:
+    'The length of your input must be more than ' + parseInt(length),
+  callback: value => value.length >= parseInt(length)
+});
+```
+
+This is then passed to the component via the validation property.
+```jsx
+  validation={validMinLength(10)}
+```
+
+As stated, as an array;
+```jsx
+  validation={[validMaxLength(32), validMinLength(10)]}
 ```
