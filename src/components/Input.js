@@ -227,20 +227,8 @@ class Input extends Component {
     let thisValue = null;
 
     switch (this.props.type) {
-      case "button":
-        thisValue = clonedEvent.target.value;
-        break;
-      case "radio":
-        thisValue = clonedEvent.target.value;
-        break;
-      case "text":
-        thisValue = clonedEvent.target.value;
-        break;
-      case "textarea":
-        thisValue = clonedEvent.target.value;
-        break;
       default:
-        thisValue = clonedEvent.target.value || clonedEvent.value || false;
+        thisValue = clonedEvent.target.value;
         break;
     }
 
@@ -406,30 +394,18 @@ class Input extends Component {
   handleHasValidation(event) {
     let value = undefined;
     switch (this.props.type) {
-      case "radio":
-        value = event.target.on;
-        break;
-
-      case "text":
-        value = event.target.value;
-        break;
-
-      case "textarea":
-        value = event.target.value;
-        break;
-
       default:
-        value = true;
+        value = event.target.value;
         break;
     }
     let validationResult = undefined;
-    let validationFailureIndex = -1;
+
     if (this.props.validation instanceof Array) {
       validationResult = this.props.validation.map(aFunction => {
         return aFunction.callback(value);
       });
 
-      validationFailureIndex = validationResult.indexOf(false);
+      let validationFailureIndex = validationResult.indexOf(false);
       if (validationFailureIndex === -1) {
         validationResult = true;
       } else {
@@ -447,6 +423,8 @@ class Input extends Component {
         });
       }
     }
+
+    if (validationResult) { this.setState({ validationErrorMessage: '' }) };
 
     this.setState({
       isValid: validationResult
@@ -561,7 +539,7 @@ class Input extends Component {
     if (this.props.validation) {
       thisValidation = (
         <p className={validationClassNames}>
-          {this.state.validationErrorMessage || "invalid"}
+          {this.state.validationErrorMessage}
         </p>
       );
     }
