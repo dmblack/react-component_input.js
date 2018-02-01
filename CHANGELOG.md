@@ -1,3 +1,11 @@
+v0.1.3 - Thu, 01 Feb 2018 11:52:57 UTC
+--------------------------------------
+
+- [d1d3efd](../../commit/d1d3efd) Build for 0.1.3
+- [420eec5](../../commit/420eec5) Minor Changes to Examples
+- [c1c380e](../../commit/c1c380e) Component Class Name Refactor
+
+
 v0.1.2 - Wed, 31 Jan 2018 12:23:28 UTC
 --------------------------------------
 
