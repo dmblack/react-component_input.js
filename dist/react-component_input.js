@@ -330,6 +330,19 @@ var Input = function (_Component) {
       valueMask: _this2.props.valueMask || undefined
     };
 
+    _this2.classFactory = function (element) {
+      if (element instanceof Array) {
+        var result = [];
+        element.forEach(function (element) {
+          result.push(element + " " + element + "-container " + element + "-" + _this2.props.type + " " + (_this2.state.hasChanged ? element + "-touched" : element + "-untouched") + " " + (_this2.state.hasFocus ? element + "-focus" : element + "-nofocus") + " " + (_this2.props.validation ? _this2.state.isValid ? element + "-validation " + element + "-valid" : element + "-validation " + element + "-invalid" : element + "-novalidation"));
+        });
+
+        return result.join(' ');
+      }
+
+      return element + " " + element + "-container " + element + "-" + _this2.props.type + " " + (_this2.state.hasChanged ? element + "-touched" : element + "-untouched") + " " + (_this2.state.hasFocus ? element + "-focus" : element + "-nofocus") + " " + (_this2.props.validation ? _this2.state.isValid ? element + "-validation " + element + "-valid" : element + "-validation " + element + "-invalid" : element + "-novalidation");
+    };
+
     // onBlur
     _this2.handleBlur = _this2.handleBlur.bind(_this2);
     _this2.handleOnBlurCallback = _this2.props.onBlur ? _this2.handleOnBlurCallback.bind(_this2) : function () {
@@ -765,110 +778,19 @@ var Input = function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      var containerClassNames = "";
-      var inputClassNames = "";
-      var labelClassNames = "";
-      var validationClassNames = "";
-
-      if (this.props.containerClassNames) {
-        if (this.props.containerClassNames instanceof Array) {
-          containerClassNames += "" + this.props.containerClassNames.join(" ");
-        } else {
-          containerClassNames += "" + this.props.containerClassNames;
-        }
-      } else {
-        containerClassNames += "input input-container input-" + this.props.type;
-      }
-
-      if (this.props.inputClassNames) {
-        if (this.props.inputClassNames instanceof Array) {
-          inputClassNames += "" + this.props.inputClassNames.join(" ");
-        } else {
-          inputClassNames += "" + this.props.inputClassNames;
-        }
-      } else {
-        inputClassNames += this.props.type + " " + this.props.type + "-container";
-      }
-
-      if (this.props.labelClassNames) {
-        if (this.props.labelClassNames instanceof Array) {
-          labelClassNames += "" + this.props.labelClassNames.join(" ");
-        } else {
-          labelClassNames += "" + this.props.labelClassNames;
-        }
-      } else {
-        labelClassNames += "label label-container label-" + this.props.type;
-      }
-
-      if (this.props.validationClassNames) {
-        if (this.props.validationClassNames instanceof Array) {
-          validationClassNames += "" + this.props.validationClassNames.join(" ");
-        } else {
-          validationClassNames += "" + this.props.validationClassNames;
-        }
-      } else {
-        validationClassNames += "validation validation-container validation-" + this.props.type;
-      }
-
-      if (this.state.hasChanged) {
-        containerClassNames += " container-touched";
-        inputClassNames += " input-touched";
-        labelClassNames += " label-touched";
-        validationClassNames += " validation-touched";
-      } else {
-        containerClassNames += " container-untouched";
-        inputClassNames += " input-untouched";
-        labelClassNames += " label-untouched";
-        validationClassNames += " validation-untouched";
-      }
-
-      if (this.state.justChanged) {
-        containerClassNames += " container-justchanged";
-        inputClassNames += " input-justchanged";
-        labelClassNames += " label-justchanged";
-        validationClassNames += " validation-justchanged";
-      }
-
-      if (this.state.hasFocus) {
-        containerClassNames += " container-focus";
-        inputClassNames += " input-focus";
-        labelClassNames += " label-focus";
-        validationClassNames += " validation-focus";
-      } else {
-        containerClassNames += " container-nofocus";
-        inputClassNames += " input-nofocus";
-        labelClassNames += " label-nofocus";
-        validationClassNames += " validation-nofocus";
-      }
-
-      if (this.props.validation) {
-        if (this.state.isValid) {
-          containerClassNames += " container-valid";
-          inputClassNames += " input-valid";
-          labelClassNames += " label-valid";
-          validationClassNames += " validation-valid";
-        } else {
-          containerClassNames += " container-invalid";
-          inputClassNames += " input-invalid";
-          labelClassNames += " label-invalid";
-          validationClassNames += " validation-invalid";
-        }
-      }
-
-      var thisValidation = null;
-      if (this.props.validation) {
-        thisValidation = _react2.default.createElement(
-          "p",
-          { className: validationClassNames },
-          this.state.validationErrorMessage || "invalid"
-        );
-      }
-
       var thisInput = _react2.default.createElement(
         "p",
         null,
         "Unsupported Input"
       );
+      var containerClassNames = this.props.containerClassNames ? this.classFactory(this.props.containerClassNames) : this.classFactory(this.props.type);
+
+      var labelClassNames = this.props.labelClassNames ? this.classFactory(this.props.labelClassNames) : this.classFactory('label');
+
+      var inputClassNames = this.props.inputClassNames ? this.classFactory(this.props.inputClassNames) : this.classFactory('input');
+
+      var validationClassNames = this.props.validationClassNames ? this.classFactory(this.props.validationClassNames) : this.classFactory('validation');
+
       switch (this.props.type) {
         case "button":
           thisInput = _react2.default.createElement("input", {
@@ -943,6 +865,15 @@ var Input = function (_Component) {
             value: this.state.value
           });
           break;
+      }
+
+      var thisValidation = null;
+      if (this.props.validation) {
+        thisValidation = _react2.default.createElement(
+          "p",
+          { className: validationClassNames },
+          this.state.validationErrorMessage || "invalid"
+        );
       }
 
       return _react2.default.createElement(
