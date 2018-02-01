@@ -48,7 +48,7 @@ it("container has appropriate classes", () => {
     <Input type="text" identifier="testInput" labelContent="Test Input" />
   );
   let container = wrapper.find(
-    "[className='input input-container input-text container-untouched container-nofocus']"
+    "[className='input input-container input-text input-untouched input-nofocus input-novalidation']"
   );
 
   expect(container.length).toEqual(1);
@@ -64,7 +64,7 @@ it("container has appropriate classes when over-ridden with single string", () =
     />
   );
   let container = wrapper.find(
-    "[className='reniatnoc container-untouched container-nofocus']"
+    "[className='reniatnoc reniatnoc-container reniatnoc-text reniatnoc-untouched reniatnoc-nofocus reniatnoc-novalidation']"
   );
 
   expect(container.length).toEqual(1);
@@ -80,7 +80,7 @@ it("container has appropriate classes when over-ridden with array of strings", (
     />
   );
   let container = wrapper.find(
-    "[className='reniatnoc reniatno container-untouched container-nofocus']"
+    "[className='reniatnoc reniatnoc-container reniatnoc-text reniatnoc-untouched reniatnoc-nofocus reniatnoc-novalidation reniatno reniatno-container reniatno-text reniatno-untouched reniatno-nofocus reniatno-novalidation']"
   );
 
   expect(container.length).toEqual(1);
@@ -100,7 +100,7 @@ it("label should have appropraite classes", () => {
     <Input type="text" identifier="testInput" labelContent="Test Input" />
   );
   let label = wrapper.find(
-    "[className='label label-container label-text label-untouched label-nofocus']"
+    "[className='label label-container label-text label-untouched label-nofocus label-novalidation']"
   );
 
   expect(label.length).toEqual(1);
@@ -116,7 +116,7 @@ it("label should have appropraite classes when over-ridden with an array of stri
     />
   );
   let label = wrapper.find(
-    "[className='lebal leba label-untouched label-nofocus']"
+    "[className='lebal lebal-container lebal-text lebal-untouched lebal-nofocus lebal-novalidation leba leba-container leba-text leba-untouched leba-nofocus leba-novalidation']"
   );
 
   expect(label.length).toEqual(1);
@@ -136,7 +136,7 @@ it("input should have appropriate classes", () => {
     <Input type="text" identifier="testInput" labelContent="Test Input" />
   );
   let input = wrapper.find(
-    "[className='text text-container input-untouched input-nofocus']"
+    "[className='input input-container input-text input-untouched input-nofocus input-novalidation']"
   );
 
   expect(input.length).toEqual(1);
@@ -152,7 +152,7 @@ it("input should have appropriate classes when over-ridden with an array of stri
     />
   );
   let input = wrapper.find(
-    "[className='tupni tupn input-untouched input-nofocus']"
+    "[className='tupni tupni-container tupni-text tupni-untouched tupni-nofocus tupni-novalidation tupn tupn-container tupn-text tupn-untouched tupn-nofocus tupn-novalidation']"
   );
 
   expect(input.length).toEqual(1);
@@ -182,7 +182,7 @@ it("p (validation) should have appropriate classes", () => {
     />
   );
   let input = wrapper.find(
-    "[className='validation validation-container validation-text validation-untouched validation-nofocus validation-invalid']"
+    "[className='validation validation-container validation-text validation-untouched validation-nofocus validation-validation validation-invalid']"
   );
 
   expect(input.length).toEqual(1);
@@ -199,7 +199,7 @@ it("p (validation) should have appropriate classes when over-ridden by an array 
     />
   );
   let input = wrapper.find(
-    "[className='noitadilav noitadila validation-untouched validation-nofocus validation-invalid']"
+    "[className='noitadilav noitadilav-container noitadilav-text noitadilav-untouched noitadilav-nofocus noitadilav-validation noitadilav-invalid noitadila noitadila-container noitadila-text noitadila-untouched noitadila-nofocus noitadila-validation noitadila-invalid']"
   );
 
   expect(input.length).toEqual(1);
@@ -282,89 +282,89 @@ it("accepts, and renders, placeholder property text - control (ensures no false 
   expect(placeholder.length).toEqual(0);
 });
 
-it("component contains a container-nofocus class default", () => {
+it("component contains a text-nofocus class default", () => {
   const wrapper = shallow(
     <Input type="text" identifier="testInput" labelContent="Test Input" />
   );
 
-  let hasNoFocus = wrapper.find(".container-nofocus");
+  let hasNoFocus = wrapper.find(".text-nofocus");
 
   expect(hasNoFocus.length).toEqual(1);
 });
 
-it("component contains a container-focus class upon receiving focus", () => {
+it("component contains a text-focus class upon receiving focus", () => {
   const wrapper = shallow(
     <Input type="text" identifier="testInput" labelContent="Test Input" />
   );
 
-  let hasNoFocus = wrapper.find(".container-nofocus");
+  let hasNoFocus = wrapper.find(".text-nofocus");
 
   expect(hasNoFocus.length).toEqual(1);
 
   wrapper.find("input").simulate("focus");
 
-  let nowHasFocus = wrapper.find(".container-focus");
+  let nowHasFocus = wrapper.find(".text-focus");
 
   expect(nowHasFocus.length).toEqual(1);
 });
 
-it("component contains a container-nofocus class upon receiving focus, then again losing focus", () => {
+it("component contains a text-nofocus class upon receiving focus, then again losing focus", () => {
   const wrapper = shallow(
     <Input type="text" identifier="testInput" labelContent="Test Input" />
   );
 
-  let hasNoFocus = wrapper.find(".container-nofocus");
+  let hasNoFocus = wrapper.find(".text-nofocus");
   expect(hasNoFocus.length).toEqual(1);
 
   wrapper.find("input").simulate("focus");
-  let nowHasFocus = wrapper.find(".container-focus");
+  let nowHasFocus = wrapper.find(".text-focus");
   expect(nowHasFocus.length).toEqual(1);
 
   wrapper.find("input").simulate("blur");
-  let noLongerHasFocus = wrapper.find(".container-nofocus");
+  let noLongerHasFocus = wrapper.find(".text-nofocus");
   expect(noLongerHasFocus.length).toEqual(1);
 });
 
-it("component contains a container-untouched class default", () => {
+it("component contains a text-untouched class default", () => {
   const wrapper = shallow(
     <Input type="text" identifier="testInput" labelContent="Test Input" />
   );
 
-  let hasNoTouched = wrapper.find(".container-untouched");
+  let hasNoTouched = wrapper.find(".text-untouched");
 
   expect(hasNoTouched.length).toEqual(1);
 });
 
-it("component contains a container-focus class upon change (touched)", () => {
+it("component contains a text-focus class upon change (touched)", () => {
   const wrapper = shallow(
     <Input type="text" identifier="testInput" labelContent="Test Input" />
   );
 
-  let hasNoTouched = wrapper.find(".container-untouched");
+  let hasNoTouched = wrapper.find(".text-untouched");
 
   expect(hasNoTouched.length).toEqual(1);
 
   wrapper.find("input").simulate("change", { target: { value: "a" } });
 
-  let nowHasTouched = wrapper.find(".container-touched");
+  let nowHasTouched = wrapper.find(".text-touched");
 
   expect(nowHasTouched.length).toEqual(1);
 });
 
-it("component contains a container-untouched class upon change (Touched), and is retained on blur", () => {
+it("component contains a text-untouched class upon change (Touched), and is retained on blur", () => {
   const wrapper = shallow(
     <Input type="text" identifier="testInput" labelContent="Test Input" />
   );
 
-  let hasNoTouched = wrapper.find(".container-untouched");
+  let hasNoTouched = wrapper.find(".text-untouched");
   expect(hasNoTouched.length).toEqual(1);
 
   wrapper.find("input").simulate("change", { target: { value: "a" } });
-  let nowHasTouched = wrapper.find(".container-touched");
+  let nowHasTouched = wrapper.find(".text-touched");
   expect(nowHasTouched.length).toEqual(1);
 
   wrapper.find("input").simulate("blur");
-  let stillRetainsTouched = wrapper.find(".container-touched");
+  let stillRetainsTouched = wrapper.find(".text-touched");
   expect(stillRetainsTouched.length).toEqual(1);
 });
 

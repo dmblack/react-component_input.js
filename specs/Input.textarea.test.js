@@ -48,7 +48,7 @@ it("container has appropriate classes", () => {
     <Input type="textarea" identifier="testInput" labelContent="Test Input" />
   );
   let container = wrapper.find(
-    "[className='input input-container input-textarea container-untouched container-nofocus']"
+    "[className='input input-container input-textarea input-untouched input-nofocus input-novalidation']"
   );
 
   expect(container.length).toEqual(1);
@@ -64,7 +64,7 @@ it("container has appropriate classes when over-ridden with single string", () =
     />
   );
   let container = wrapper.find(
-    "[className='reniatnoc container-untouched container-nofocus']"
+    "[className='reniatnoc reniatnoc-container reniatnoc-textarea reniatnoc-untouched reniatnoc-nofocus reniatnoc-novalidation']"
   );
 
   expect(container.length).toEqual(1);
@@ -80,7 +80,7 @@ it("container has appropriate classes when over-ridden with array of strings", (
     />
   );
   let container = wrapper.find(
-    "[className='reniatnoc reniatno container-untouched container-nofocus']"
+    "[className='reniatnoc reniatnoc-container reniatnoc-textarea reniatnoc-untouched reniatnoc-nofocus reniatnoc-novalidation reniatno reniatno-container reniatno-textarea reniatno-untouched reniatno-nofocus reniatno-novalidation']"
   );
 
   expect(container.length).toEqual(1);
@@ -100,7 +100,7 @@ it("label should have appropraite classes", () => {
     <Input type="textarea" identifier="testInput" labelContent="Test Input" />
   );
   let label = wrapper.find(
-    "[className='label label-container label-textarea label-untouched label-nofocus']"
+    "[className='label label-container label-textarea label-untouched label-nofocus label-novalidation']"
   );
 
   expect(label.length).toEqual(1);
@@ -116,7 +116,7 @@ it("label should have appropraite classes when over-ridden with an array of stri
     />
   );
   let label = wrapper.find(
-    "[className='lebal leba label-untouched label-nofocus']"
+    "[className='lebal lebal-container lebal-textarea lebal-untouched lebal-nofocus lebal-novalidation leba leba-container leba-textarea leba-untouched leba-nofocus leba-novalidation']"
   );
 
   expect(label.length).toEqual(1);
@@ -127,7 +127,7 @@ it("input should have appropriate classes", () => {
     <Input type="textarea" identifier="testInput" labelContent="Test Input" />
   );
   let input = wrapper.find(
-    "[className='textarea textarea-container input-untouched input-nofocus']"
+    "[className='textarea textarea-container textarea-textarea textarea-untouched textarea-nofocus textarea-novalidation']"
   );
 
   expect(input.length).toEqual(1);
@@ -143,7 +143,7 @@ it("input should have appropriate classes when over-ridden with an array of stri
     />
   );
   let input = wrapper.find(
-    "[className='tupni tupn input-untouched input-nofocus']"
+    "[className='tupni tupni-container tupni-textarea tupni-untouched tupni-nofocus tupni-novalidation tupn tupn-container tupn-textarea tupn-untouched tupn-nofocus tupn-novalidation']"
   );
 
   expect(input.length).toEqual(1);
@@ -173,7 +173,7 @@ it("p (validation) should have appropriate classes", () => {
     />
   );
   let input = wrapper.find(
-    "[className='validation validation-container validation-textarea validation-untouched validation-nofocus validation-invalid']"
+    "[className='validation validation-container validation-textarea validation-untouched validation-nofocus validation-validation validation-invalid']"
   );
 
   expect(input.length).toEqual(1);
@@ -190,7 +190,7 @@ it("p (validation) should have appropriate classes when over-ridden by an array 
     />
   );
   let input = wrapper.find(
-    "[className='noitadilav noitadila validation-untouched validation-nofocus validation-invalid']"
+    "[className='noitadilav noitadilav-container noitadilav-textarea noitadilav-untouched noitadilav-nofocus noitadilav-validation noitadilav-invalid noitadila noitadila-container noitadila-textarea noitadila-untouched noitadila-nofocus noitadila-validation noitadila-invalid']"
   );
 
   expect(input.length).toEqual(1);
@@ -258,89 +258,89 @@ it("accepts, and renders, placeholder property text - control (ensures no false 
   expect(placeholder.length).toEqual(0);
 });
 
-it("component contains a container-nofocus class default", () => {
+it("component contains a textarea-nofocus class default", () => {
   const wrapper = shallow(
     <Input type="textarea" identifier="testInput" labelContent="Test Input" />
   );
 
-  let hasNoFocus = wrapper.find(".container-nofocus");
+  let hasNoFocus = wrapper.find(".textarea-nofocus");
 
   expect(hasNoFocus.length).toEqual(1);
 });
 
-it("component contains a container-focus class upon receiving focus", () => {
+it("component contains a textarea-focus class upon receiving focus", () => {
   const wrapper = shallow(
     <Input type="textarea" identifier="testInput" labelContent="Test Input" />
   );
 
-  let hasNoFocus = wrapper.find(".container-nofocus");
+  let hasNoFocus = wrapper.find(".textarea-nofocus");
 
   expect(hasNoFocus.length).toEqual(1);
 
   wrapper.find("textarea").simulate("focus");
 
-  let nowHasFocus = wrapper.find(".container-focus");
+  let nowHasFocus = wrapper.find(".textarea-focus");
 
   expect(nowHasFocus.length).toEqual(1);
 });
 
-it("component contains a container-nofocus class upon receiving focus, then again losing focus", () => {
+it("component contains a textarea-nofocus class upon receiving focus, then again losing focus", () => {
   const wrapper = shallow(
     <Input type="textarea" identifier="testInput" labelContent="Test Input" />
   );
 
-  let hasNoFocus = wrapper.find(".container-nofocus");
+  let hasNoFocus = wrapper.find(".textarea-nofocus");
   expect(hasNoFocus.length).toEqual(1);
 
   wrapper.find("textarea").simulate("focus");
-  let nowHasFocus = wrapper.find(".container-focus");
+  let nowHasFocus = wrapper.find(".textarea-focus");
   expect(nowHasFocus.length).toEqual(1);
 
   wrapper.find("textarea").simulate("blur");
-  let noLongerHasFocus = wrapper.find(".container-nofocus");
+  let noLongerHasFocus = wrapper.find(".textarea-nofocus");
   expect(noLongerHasFocus.length).toEqual(1);
 });
 
-it("component contains a container-untouched class default", () => {
+it("component contains a textarea-untouched class default", () => {
   const wrapper = shallow(
     <Input type="textarea" identifier="testInput" labelContent="Test Input" />
   );
 
-  let hasNoTouched = wrapper.find(".container-untouched");
+  let hasNoTouched = wrapper.find(".textarea-untouched");
 
   expect(hasNoTouched.length).toEqual(1);
 });
 
-it("component contains a container-focus class upon change (touched)", () => {
+it("component contains a textarea-focus class upon change (touched)", () => {
   const wrapper = shallow(
     <Input type="textarea" identifier="testInput" labelContent="Test Input" />
   );
 
-  let hasNoTouched = wrapper.find(".container-untouched");
+  let hasNoTouched = wrapper.find(".textarea-untouched");
 
   expect(hasNoTouched.length).toEqual(1);
 
   wrapper.find("textarea").simulate("change", { target: { value: "a" } });
 
-  let nowHasTouched = wrapper.find(".container-touched");
+  let nowHasTouched = wrapper.find(".textarea-touched");
 
   expect(nowHasTouched.length).toEqual(1);
 });
 
-it("component contains a container-untouched class upon change (Touched), and is retained on blur", () => {
+it("component contains a textarea-untouched class upon change (Touched), and is retained on blur", () => {
   const wrapper = shallow(
     <Input type="textarea" identifier="testInput" labelContent="Test Input" />
   );
 
-  let hasNoTouched = wrapper.find(".container-untouched");
+  let hasNoTouched = wrapper.find(".textarea-untouched");
   expect(hasNoTouched.length).toEqual(1);
 
   wrapper.find("textarea").simulate("change", { target: { value: "a" } });
-  let nowHasTouched = wrapper.find(".container-touched");
+  let nowHasTouched = wrapper.find(".textarea-touched");
   expect(nowHasTouched.length).toEqual(1);
 
   wrapper.find("textarea").simulate("blur");
-  let stillRetainsTouched = wrapper.find(".container-touched");
+  let stillRetainsTouched = wrapper.find(".textarea-touched");
   expect(stillRetainsTouched.length).toEqual(1);
 });
 

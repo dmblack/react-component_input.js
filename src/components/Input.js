@@ -15,6 +15,35 @@ class Input extends Component {
       valueMask: this.props.valueMask || undefined
     };
 
+    this.classFactory = (element) => {
+      if (element instanceof Array) {
+        let result = [];
+        element.forEach(element => {
+          result.push(`${element} ${element}-container ${element}-${this.props.type} ${this.state.hasChanged
+            ? `${element}-touched`
+            : `${element}-untouched`} ${this.state.hasFocus
+            ? `${element}-focus`
+            : `${element}-nofocus`} ${this.props.validation
+            ? this.state.isValid
+              ? `${element}-validation ${element}-valid`
+              : `${element}-validation ${element}-invalid`
+            : `${element}-novalidation`}`);
+        })
+
+        return result.join(' ');
+      }
+
+      return `${element} ${element}-container ${element}-${this.props.type} ${this.state.hasChanged
+        ? `${element}-touched`
+        : `${element}-untouched`} ${this.state.hasFocus
+        ? `${element}-focus`
+        : `${element}-nofocus`} ${this.props.validation
+        ? this.state.isValid
+          ? `${element}-validation ${element}-valid`
+          : `${element}-validation ${element}-invalid`
+        : `${element}-novalidation`}`;
+    }
+
     // onBlur
     this.handleBlur = this.handleBlur.bind(this);
     this.handleOnBlurCallback = this.props.onBlur
@@ -425,108 +454,23 @@ class Input extends Component {
   }
 
   render() {
-    let containerClassNames = "";
-    let inputClassNames = "";
-    let labelClassNames = "";
-    let validationClassNames = "";
-
-    if (this.props.containerClassNames) {
-      if (this.props.containerClassNames instanceof Array) {
-        containerClassNames += `${this.props.containerClassNames.join(" ")}`;
-      } else {
-        containerClassNames += `${this.props.containerClassNames}`;
-      }
-    } else {
-      containerClassNames += `input input-container input-${this.props.type}`;
-    }
-
-    if (this.props.inputClassNames) {
-      if (this.props.inputClassNames instanceof Array) {
-        inputClassNames += `${this.props.inputClassNames.join(" ")}`;
-      } else {
-        inputClassNames += `${this.props.inputClassNames}`;
-      }
-    } else {
-      inputClassNames += `${this.props.type} ${this.props.type}-container`;
-    }
-
-    if (this.props.labelClassNames) {
-      if (this.props.labelClassNames instanceof Array) {
-        labelClassNames += `${this.props.labelClassNames.join(" ")}`;
-      } else {
-        labelClassNames += `${this.props.labelClassNames}`;
-      }
-    } else {
-      labelClassNames += `label label-container label-${this.props.type}`;
-    }
-
-    if (this.props.validationClassNames) {
-      if (this.props.validationClassNames instanceof Array) {
-        validationClassNames += `${this.props.validationClassNames.join(" ")}`;
-      } else {
-        validationClassNames += `${this.props.validationClassNames}`;
-      }
-    } else {
-      validationClassNames += `validation validation-container validation-${
-        this.props.type
-      }`;
-    }
-
-    if (this.state.hasChanged) {
-      containerClassNames += ` container-touched`;
-      inputClassNames += " input-touched";
-      labelClassNames += " label-touched";
-      validationClassNames += " validation-touched";
-    } else {
-      containerClassNames += " container-untouched";
-      inputClassNames += " input-untouched";
-      labelClassNames += " label-untouched";
-      validationClassNames += " validation-untouched";
-    }
-
-    if (this.state.justChanged) {
-      containerClassNames += " container-justchanged";
-      inputClassNames += " input-justchanged";
-      labelClassNames += " label-justchanged";
-      validationClassNames += " validation-justchanged";
-    }
-
-    if (this.state.hasFocus) {
-      containerClassNames += " container-focus";
-      inputClassNames += " input-focus";
-      labelClassNames += " label-focus";
-      validationClassNames += " validation-focus";
-    } else {
-      containerClassNames += " container-nofocus";
-      inputClassNames += " input-nofocus";
-      labelClassNames += " label-nofocus";
-      validationClassNames += " validation-nofocus";
-    }
-
-    if (this.props.validation) {
-      if (this.state.isValid) {
-        containerClassNames += " container-valid";
-        inputClassNames += " input-valid";
-        labelClassNames += " label-valid";
-        validationClassNames += " validation-valid";
-      } else {
-        containerClassNames += " container-invalid";
-        inputClassNames += " input-invalid";
-        labelClassNames += " label-invalid";
-        validationClassNames += " validation-invalid";
-      }
-    }
-
-    let thisValidation = null;
-    if (this.props.validation) {
-      thisValidation = (
-        <p className={validationClassNames}>
-          {this.state.validationErrorMessage || "invalid"}
-        </p>
-      );
-    }
-
     let thisInput = <p>Unsupported Input</p>;
+    let containerClassNames = this.props.containerClassNames
+      ? this.classFactory(this.props.containerClassNames)
+      : this.classFactory(this.props.type)
+
+    let labelClassNames = this.props.labelClassNames
+      ? this.classFactory(this.props.labelClassNames)
+      : this.classFactory('label')
+    
+    let inputClassNames = this.props.inputClassNames
+      ? this.classFactory(this.props.inputClassNames)
+      : this.classFactory('input')
+
+    let validationClassNames = this.props.validationClassNames
+      ? this.classFactory(this.props.validationClassNames)
+      : this.classFactory('validation')
+
     switch (this.props.type) {
       case "button":
         thisInput = (
@@ -611,6 +555,15 @@ class Input extends Component {
           />
         );
         break;
+    }
+
+    let thisValidation = null;
+    if (this.props.validation) {
+      thisValidation = (
+        <p className={validationClassNames}>
+          {this.state.validationErrorMessage || "invalid"}
+        </p>
+      );
     }
 
     return (
