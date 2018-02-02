@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import Input from 'react-component_input';
 import Button from './button';
+import Password from './password';
 import Radio from './radio';
 import TextExample from './text';
 import Textarea from './textarea';
@@ -10,6 +11,7 @@ const appElement = document.getElementById('example');
 
 const examples = [
   Button,
+  Password,
   Radio,
   TextExample,
   Textarea
