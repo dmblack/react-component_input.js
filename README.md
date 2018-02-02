@@ -68,7 +68,7 @@ A basic example may be;
 }
 
 /* Hides validation messages whilst the Input has cursor focus */
-.container-focus .validation-invalid {
+.validation-focus.validation-invalid {
   display: none;
 }
 ```
