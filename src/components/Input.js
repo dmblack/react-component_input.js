@@ -159,6 +159,12 @@ class Input extends Component {
         ourCallbackResult = false;
         break;
     }
+
+    // Handles initial validation state (Triggered for error message)
+    if (this.props.validation) {
+      this.handleHasValidation();
+    }
+
     if (ourCallbackResult !== "") {
       this.setState({
         onComponentDidMountCallback: ourCallbackResult
@@ -393,10 +399,16 @@ class Input extends Component {
 
   handleHasValidation(event) {
     let value = undefined;
-    switch (this.props.type) {
-      default:
-        value = event.target.value;
-        break;
+
+    // Handles initial validation state, which does not include an event.
+    if (event) {
+      switch (this.props.type) {
+        default:
+          value = event.target.value;
+          break;
+      }
+    } else {
+      value = this.state.value;
     }
     let validationResult = undefined;
 
