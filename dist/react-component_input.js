@@ -463,6 +463,12 @@ var Input = function (_Component) {
           ourCallbackResult = false;
           break;
       }
+
+      // Handles initial validation state (Triggered for error message)
+      if (this.props.validation) {
+        this.handleHasValidation();
+      }
+
       if (ourCallbackResult !== "") {
         this.setState({
           onComponentDidMountCallback: ourCallbackResult
@@ -541,20 +547,8 @@ var Input = function (_Component) {
       var thisValue = null;
 
       switch (this.props.type) {
-        case "button":
-          thisValue = clonedEvent.target.value;
-          break;
-        case "radio":
-          thisValue = clonedEvent.target.value;
-          break;
-        case "text":
-          thisValue = clonedEvent.target.value;
-          break;
-        case "textarea":
-          thisValue = clonedEvent.target.value;
-          break;
         default:
-          thisValue = clonedEvent.target.value || clonedEvent.value || false;
+          thisValue = clonedEvent.target.value;
           break;
       }
 
@@ -729,31 +723,25 @@ var Input = function (_Component) {
     key: "handleHasValidation",
     value: function handleHasValidation(event) {
       var value = undefined;
-      switch (this.props.type) {
-        case "radio":
-          value = event.target.on;
-          break;
 
-        case "text":
-          value = event.target.value;
-          break;
-
-        case "textarea":
-          value = event.target.value;
-          break;
-
-        default:
-          value = true;
-          break;
+      // Handles initial validation state, which does not include an event.
+      if (event) {
+        switch (this.props.type) {
+          default:
+            value = event.target.value;
+            break;
+        }
+      } else {
+        value = this.state.value;
       }
       var validationResult = undefined;
-      var validationFailureIndex = -1;
+
       if (this.props.validation instanceof Array) {
         validationResult = this.props.validation.map(function (aFunction) {
           return aFunction.callback(value);
         });
 
-        validationFailureIndex = validationResult.indexOf(false);
+        var validationFailureIndex = validationResult.indexOf(false);
         if (validationFailureIndex === -1) {
           validationResult = true;
         } else {
@@ -770,6 +758,10 @@ var Input = function (_Component) {
           });
         }
       }
+
+      if (validationResult) {
+        this.setState({ validationErrorMessage: '' });
+      };
 
       this.setState({
         isValid: validationResult
@@ -872,7 +864,7 @@ var Input = function (_Component) {
         thisValidation = _react2.default.createElement(
           "p",
           { className: validationClassNames },
-          this.state.validationErrorMessage || "invalid"
+          this.state.validationErrorMessage
         );
       }
 
