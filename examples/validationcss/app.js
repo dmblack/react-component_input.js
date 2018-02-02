@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import Input from 'react-component_input';
+import Password from './password';
 import TextExample from './text';
 import Textarea from './textarea';
 
 const appElement = document.getElementById('example');
 
 const examples = [
+  Password,
   TextExample,
   Textarea
 ];
