@@ -351,7 +351,7 @@ it("component contains a text-focus class upon change (touched)", () => {
   expect(nowHasTouched.length).toEqual(1);
 });
 
-it("component contains a text-untouched class upon change (Touched), and is retained on blur", () => {
+it("component contains a text-touched class upon change (Touched), and is retained on blur", () => {
   const wrapper = shallow(
     <Input type="text" identifier="testInput" labelContent="Test Input" />
   );
@@ -366,6 +366,26 @@ it("component contains a text-untouched class upon change (Touched), and is reta
   wrapper.find("input").simulate("blur");
   let stillRetainsTouched = wrapper.find(".text-touched");
   expect(stillRetainsTouched.length).toEqual(1);
+});
+
+it("component accepts disabled propery, which inhibits changing value", () => {
+  const wrapper = shallow(
+    <Input type="text" identifier="testInput" labelContent="Test Input" disabled={true}/>
+  );
+
+  let hasNoTouched = wrapper.find(".text-untouched");
+
+  expect(hasNoTouched.length).toEqual(1);
+
+  expect(wrapper.find("input").html().includes('disabled')).toEqual(true);
+
+  wrapper.find("input").simulate("simulate", { target: { value: "ab" } });
+
+  let nowHasTouched = wrapper.find(".text-untouched");
+
+  expect(nowHasTouched.length).toEqual(1);
+
+  expect (wrapper.state('value')).toEqual('');
 });
 
 it("accepts a validation object, with default state validation-invalid", () => {
