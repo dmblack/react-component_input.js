@@ -358,6 +358,26 @@ it("accepts a validation object, with default state validation-invalid", () => {
   expect(hiddenValidationError.length).toEqual(1);
 });
 
+it("component accepts disabled propery, which inhibits changing value", () => {
+  const wrapper = shallow(
+    <Input type="radio" identifier="testInput" labelContent="Test Input" disabled={true}/>
+  );
+
+  let hasNoTouched = wrapper.find(".radio-untouched");
+
+  expect(hasNoTouched.length).toEqual(1);
+
+  expect(wrapper.find("input").html().includes('disabled')).toEqual(true);
+
+  wrapper.find("input").simulate("simulate", { target: { value: "ab" } });
+
+  let nowHasTouched = wrapper.find(".radio-untouched");
+
+  expect(nowHasTouched.length).toEqual(1);
+
+  expect (wrapper.state('value')).toEqual('');
+});
+
 // Must write a way to properly handle and test these scenarios (Though they should never happen...)
 // it("accepts a validation object, and updates state to validation-valid upon successful validation criteria (text input simulation)", () => {
 //   const wrapper = shallow(

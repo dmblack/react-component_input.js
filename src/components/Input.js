@@ -9,6 +9,7 @@ class Input extends Component {
       hasChanged: false,
       hasFocus: false,
       id: this.props.identifier || undefined,
+      disabled: this.props.disabled || false,
       isValid: this.props.validation ? false : true,
       justChanged: false,
       value: this.props.value || "",
@@ -466,6 +467,7 @@ class Input extends Component {
         thisInput = (
           <input
             className={inputClassNames}
+            disabled={this.state.disabled || false}
             id={this.props.identifier}
             name={this.props.name || this.props.identifier}
             onBlur={this.handleBlur}
@@ -483,6 +485,7 @@ class Input extends Component {
         thisInput = (
           <input
             className={inputClassNames}
+            disabled={this.state.disabled || false}
             id={this.props.identifier}
             name={this.props.name || this.props.identifier}
             onBlur={this.handleBlur}
@@ -495,10 +498,11 @@ class Input extends Component {
         );
         break;
 
-      case "text":
+        case "text":
         thisInput = (
           <input
             className={inputClassNames}
+            disabled={this.state.disabled || false}
             id={this.props.identifier}
             name={this.props.name || this.props.identifier}
             onBlur={this.handleBlur}
@@ -516,6 +520,7 @@ class Input extends Component {
         thisInput = (
           <textarea
             className={inputClassNames}
+            disabled={this.state.disabled || false}
             id={this.props.identifier}
             name={this.props.name || this.props.identifier}
             onBlur={this.handleBlur}
@@ -533,6 +538,7 @@ class Input extends Component {
         thisInput = (
           <input
             className={inputClassNames}
+            disabled={this.state.disabled || false}
             id={this.props.identifier}
             name={this.props.name || this.props.identifier}
             onBlur={this.handleBlur}
@@ -574,6 +580,8 @@ Input.propTypes = {
     PropTypes.arrayOf(PropTypes.string),
     PropTypes.string
   ]),
+  // Enables 'disabled' html input type - which is a browser behavior.
+  disabled: PropTypes.bool,
   /** Defines the HTML ID applied to the input (Required). */
   identifier: PropTypes.string.isRequired,
   /** An input class names override for the input. Expects a, or array of,

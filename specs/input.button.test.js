@@ -383,6 +383,27 @@ it("accepts an onChange object [array of], and updates the state of onChange wit
   expect(wrapper.state("onChangeCallback")[1]).toEqual({ result: false });
 });
 
+
+it("component accepts disabled propery, which inhibits changing value", () => {
+  const wrapper = shallow(
+    <Input type="button" identifier="testInput" labelContent="Test Input" disabled={true}/>
+  );
+
+  let hasNoTouched = wrapper.find(".button-untouched");
+
+  expect(hasNoTouched.length).toEqual(1);
+
+  expect(wrapper.find("input").html().includes('disabled')).toEqual(true);
+
+  wrapper.find("input").simulate("simulate", { target: { value: "ab" } });
+
+  let nowHasTouched = wrapper.find(".button-untouched");
+
+  expect(nowHasTouched.length).toEqual(1);
+
+  expect (wrapper.state('value')).toEqual('');
+});
+
 // Currently seems to fail because of something similar to htis; https://github.com/facebook/jest/issues/207
 // WIP
 // it ("accepts an onClick object, and updates the state of onClick with appropraite response criteria", () => {

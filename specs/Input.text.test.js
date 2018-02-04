@@ -367,6 +367,26 @@ it("accepts a validation object, with default state validation-invalid", () => {
   expect(hiddenValidationError.length).toEqual(1);
 });
 
+it("component accepts disabled propery, which inhibits changing value", () => {
+  const wrapper = shallow(
+    <Input type="text" identifier="testInput" labelContent="Test Input" disabled={true}/>
+  );
+
+  let hasNoTouched = wrapper.find(".text-untouched");
+
+  expect(hasNoTouched.length).toEqual(1);
+
+  expect(wrapper.find("input").html().includes('disabled')).toEqual(true);
+
+  wrapper.find("input").simulate("simulate", { target: { value: "ab" } });
+
+  let nowHasTouched = wrapper.find(".text-untouched");
+
+  expect(nowHasTouched.length).toEqual(1);
+
+  expect (wrapper.state('value')).toEqual('');
+});
+
 it("accepts a validation object, and updates state to validation-valid upon successful validation criteria (text input simulation)", () => {
   const wrapper = shallow(
     <Input
