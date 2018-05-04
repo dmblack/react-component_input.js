@@ -1,5 +1,5 @@
-/* global expect */
-/* eslint-env yarn */
+  /* global expect */
+  /* eslint-env yarn */
 
 import React from "react";
 import ReactDOM from "react-dom";

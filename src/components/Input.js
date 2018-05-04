@@ -234,6 +234,12 @@ class Input extends Component {
     let thisValue = null;
 
     switch (this.props.type) {
+      case 'radio':
+        thisValue = clonedEvent.target.value === 'on'
+          ? "selected"
+          : "not-seclected"
+        break;
+
       default:
         thisValue = clonedEvent.target.value;
         break;
@@ -498,7 +504,7 @@ class Input extends Component {
         );
         break;
 
-        case "text":
+      case "text":
         thisInput = (
           <input
             className={inputClassNames}
@@ -632,7 +638,14 @@ Input.propTypes = {
     PropTypes.func
   ]),
   placeholder: PropTypes.string,
-  type: PropTypes.string.isRequired,
+  type: PropTypes.oneOf([
+    'button',
+    'checkbox',
+    'password',
+    'text',
+    'textarea',
+    'radio',
+  ]),
   /** A validation class names override - defaults to "validation-<criteria>".
    * Expects a string, or array of strings */
   validationClassNames: PropTypes.oneOfType([
