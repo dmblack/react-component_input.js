@@ -12,7 +12,7 @@ let minLength = value => {
 
 let greaterThanZero = {
   callback: minLength,
-  validationErrorMessage:
+  errorMessage:
     "Your input is too short. Expecting anything longer than 0"
 };
 
