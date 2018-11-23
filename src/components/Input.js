@@ -23,12 +23,12 @@ class Input extends Component {
           result.push(`${element} ${element}-container ${element}-${this.props.type} ${this.state.hasChanged
             ? `${element}-touched`
             : `${element}-untouched`} ${this.state.hasFocus
-            ? `${element}-focus`
-            : `${element}-nofocus`} ${this.props.validation
-            ? this.state.isValid
-              ? `${element}-validation ${element}-valid`
-              : `${element}-validation ${element}-invalid`
-            : `${element}-novalidation`}`);
+              ? `${element}-focus`
+              : `${element}-nofocus`} ${this.props.validation
+                ? this.state.isValid
+                  ? `${element}-validation ${element}-valid`
+                  : `${element}-validation ${element}-invalid`
+                : `${element}-novalidation`}`);
         })
 
         return result.join(' ');
@@ -37,12 +37,47 @@ class Input extends Component {
       return `${element} ${element}-container ${element}-${this.props.type} ${this.state.hasChanged
         ? `${element}-touched`
         : `${element}-untouched`} ${this.state.hasFocus
-        ? `${element}-focus`
-        : `${element}-nofocus`} ${this.props.validation
-        ? this.state.isValid
-          ? `${element}-validation ${element}-valid`
-          : `${element}-validation ${element}-invalid`
-        : `${element}-novalidation`}`;
+          ? `${element}-focus`
+          : `${element}-nofocus`} ${this.props.validation
+            ? this.state.isValid
+              ? `${element}-validation ${element}-valid`
+              : `${element}-validation ${element}-invalid`
+            : `${element}-novalidation`}`;
+    }
+
+    /**
+     * Used for input taht have child value like behavior (radio, select)
+     */
+    this.childValueFactory = (values) => {
+      if (values instanceof Array) {
+        let childValues = [];
+        values.forEach(value => {
+          switch (this.props.type) {
+            case 'radio':
+              childValues.push(<input type='radio' id={value.name} name={value.name} key={value.name} tooltip={value.tooltip} value={value.value} />)
+              break;
+            case 'select':
+              childValues.push(<option id={value.name} name={value.name} key={value.name} tooltip={value.tooltip} value={value.value}>{value.name}</option>)
+              break;
+            default:
+              childValues.push(<input type='radio' id={value.name} name={value.name} key={value.name} tooltip={value.tooltip} value={value.value} />)
+              break;
+          }
+        });
+
+        return childValues;
+      }
+
+      else {
+        switch (this.props.type) {
+          case 'radio':
+            return childValues.push(<input type='radio' id={value.name} name={value.name} tooltip={value.tooltip} value={value.value} />)
+          case 'select':
+            return childValues.push(<option id={value.name} name={value.name} tooltip={value.tooltip} value={value.value}>{value.name}</option>)
+          default:
+            return childValues.push(<input type='radio' id={value.name} name={value.name} tooltip={value.tooltip} value={value.value} />)
+        }
+      }
     }
 
     // onBlur
@@ -143,7 +178,7 @@ class Input extends Component {
     }
   }
 
-  componentDidMount() {
+  componentDidMount () {
     let ourCallbackResult = "";
     switch (typeof this.props.onComponentDidMount) {
       case "function":
@@ -177,7 +212,7 @@ class Input extends Component {
    * Handles blur state change triggered by default react onBlur.
    * @param {React Event} event
    */
-  handleBlur(event) {
+  handleBlur (event) {
     let clonedEvent = Object.assign({}, event);
     this.setState(
       {
@@ -196,7 +231,7 @@ class Input extends Component {
    *  params passed from different input.
    * @param {*} event
    */
-  handleOnBlurCallback(event) {
+  handleOnBlurCallback (event) {
     let ourCallbackResult = "";
     let _this = Object.assign({}, this.state, event);
     switch (typeof this.onBlur) {
@@ -228,7 +263,7 @@ class Input extends Component {
    *  Will also trigger a validation check.
    * @param {React Event} event
    */
-  handleChange(event) {
+  handleChange (event) {
     let clonedEvent = Object.assign({}, event);
 
     let thisValue = null;
@@ -265,7 +300,7 @@ class Input extends Component {
    * @param {*} event - Passed from the input control. Be careful to handle the
    *  different types of params passed from different input.
    */
-  handleOnChangeCallback(event) {
+  handleOnChangeCallback (event) {
     let ourCallbackResult = "";
     let _this = Object.assign({}, this.state, event);
     switch (typeof this.onChange) {
@@ -294,7 +329,7 @@ class Input extends Component {
    * Triggered by React onClick event.
    * @param {React Event} event
    */
-  handleClick(event) {
+  handleClick (event) {
     let clonedEvent = Object.assign({}, event);
 
     // We need a button handler, as this is the only way to which this input
@@ -302,6 +337,7 @@ class Input extends Component {
     if (this.props.type === "button") {
       this.handleChange(clonedEvent);
     }
+
     this.setState(
       {
         wasClicked: true
@@ -318,7 +354,7 @@ class Input extends Component {
    * @param {*} event - Passed from the input control. Be careful to handle the
    *  different types of params passed from different input.
    */
-  handleOnClickCallback(event) {
+  handleOnClickCallback (event) {
     let ourCallbackResult = "";
     let _this = Object.assign({}, this.state, event);
     switch (typeof this.onClick) {
@@ -343,7 +379,7 @@ class Input extends Component {
     }
   }
 
-  handleFocus(event) {
+  handleFocus (event) {
     let clonedEvent = Object.assign({}, event);
     this.setState(
       {
@@ -361,7 +397,7 @@ class Input extends Component {
    * @param {*} event - Passed from the input control. Be careful to handle the
    *  different types of params passed from different input.
    */
-  handleOnFocusCallback(event) {
+  handleOnFocusCallback (event) {
     let ourCallbackResult = "";
     let _this = Object.assign({}, this.state, event);
     switch (typeof this.onFocus) {
@@ -386,7 +422,7 @@ class Input extends Component {
     }
   }
 
-  handleHasChanged() {
+  handleHasChanged () {
     if (!this.state.hasChanged) {
       this.setState({
         hasChanged: true
@@ -398,7 +434,7 @@ class Input extends Component {
     });
   }
 
-  handleHasValidation(event) {
+  handleHasValidation (event) {
     let value = undefined;
 
     // Handles initial validation state, which does not include an event.
@@ -424,7 +460,7 @@ class Input extends Component {
       } else {
         validationResult = false;
         this.setState({
-          validationErrorMessage: this.props.validation[validationFailureIndex]
+          errorMessage: this.props.validation[validationFailureIndex]
             .errorMessage
         });
       }
@@ -432,19 +468,19 @@ class Input extends Component {
       validationResult = this.props.validation.callback(value);
       if (validationResult !== true) {
         this.setState({
-          validationErrorMessage: this.props.validation.errorMessage
+          errorMessage: this.props.validation.errorMessage
         });
       }
     }
 
-    if (validationResult) { this.setState({ validationErrorMessage: '' }) };
+    if (validationResult) { this.setState({ errorMessage: '' }) };
 
     this.setState({
       isValid: validationResult
     });
   }
 
-  render() {
+  render () {
     let thisInput = <p>Unsupported Input</p>;
     let containerClassNames = this.props.containerClassNames
       ? this.classFactory(this.props.containerClassNames)
@@ -453,7 +489,7 @@ class Input extends Component {
     let labelClassNames = this.props.labelClassNames
       ? this.classFactory(this.props.labelClassNames)
       : this.classFactory('label')
-    
+
     let inputClassNames = this.props.inputClassNames
       ? this.classFactory(this.props.inputClassNames)
       : this.classFactory('input')
@@ -461,6 +497,10 @@ class Input extends Component {
     let validationClassNames = this.props.validationClassNames
       ? this.classFactory(this.props.validationClassNames)
       : this.classFactory('validation')
+
+    let childValues = this.props.childValues
+      ? this.childValueFactory(this.props.childValues)
+      : undefined
 
     switch (this.props.type) {
       case "button":
@@ -483,7 +523,7 @@ class Input extends Component {
 
       case "radio":
         thisInput = (
-          <input
+          <div
             className={inputClassNames}
             disabled={this.state.disabled || false}
             id={this.props.identifier}
@@ -493,12 +533,31 @@ class Input extends Component {
             onClick={this.handleClick}
             onFocus={this.handleFocus}
             placeholder={this.props.placeholder || ""}
-            type={this.props.type}
-          />
+            type={this.props.type}>
+            {childValues}
+          </div>
         );
         break;
 
-        case "text":
+      case "select":
+        thisInput = (
+          <select
+            className={inputClassNames}
+            disabled={this.state.disabled || false}
+            id={this.props.identifier}
+            name={this.props.name || this.props.identifier}
+            onBlur={this.handleBlur}
+            onChange={this.handleChange}
+            onClick={this.handleClick}
+            onFocus={this.handleFocus}
+            placeholder={this.props.placeholder || ""}
+            type={this.props.type}>
+            {childValues}
+          </select>
+        );
+        break;
+
+      case "text":
         thisInput = (
           <input
             className={inputClassNames}
@@ -557,7 +616,7 @@ class Input extends Component {
     if (this.props.validation) {
       thisValidation = (
         <p className={validationClassNames}>
-          {this.state.validationErrorMessage}
+          {this.state.errorMessage}
         </p>
       );
     }
@@ -575,6 +634,17 @@ class Input extends Component {
 }
 
 Input.propTypes = {
+  /** childValues are objects that which the input is dependent, such
+   * as a radio, or a select input. Name and Value are mandatory, however
+   * tooltip is optional.
+   */
+  childValues: PropTypes.arrayOf(
+    PropTypes.shape({
+      tooltip: PropTypes.string,
+      name: PropTypes.string.isRequired,
+      value: PropTypes.string.isRequired
+    })
+  ),
   /** containerClassNames are class names applied to the container only. */
   containerClassNames: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.string),
