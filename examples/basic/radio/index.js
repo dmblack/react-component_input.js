@@ -12,10 +12,12 @@ class Radio extends Component {
           childValues={
             [
               {
+                label: "Radio A",
                 name: "radio",
                 value: "Radio A"
               },
               {
+                label: "Radio B",
                 name: "radio",
                 value: "Radio B"
               }

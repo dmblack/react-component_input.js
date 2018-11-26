@@ -54,13 +54,53 @@ class Input extends Component {
         values.forEach(value => {
           switch (this.props.type) {
             case 'radio':
-              childValues.push(<input type='radio' id={value.name} name={value.name} key={value.name} tooltip={value.tooltip} value={value.value} />)
+              childValues.push(
+                <div>
+                  <input
+                    type='radio'
+                    id={value.name}
+                    name={value.name}
+                    key={value.name}
+                    tooltip={value.tooltip}
+                    value={value.value}
+                  />
+                  <label
+                    for={value.name}
+                  >{value.label}</label>
+                </div>
+              )
               break;
+
             case 'select':
-              childValues.push(<option id={value.name} name={value.name} key={value.name} tooltip={value.tooltip} value={value.value}>{value.name}</option>)
+              childValues.push(
+                <option
+                  id={value.name}
+                  name={value.name}
+                  key={value.name}
+                  tooltip={value.tooltip}
+                  value={value.value}
+                >
+                  {value.name}
+                </option>
+              )
               break;
+
             default:
-              childValues.push(<input type='radio' id={value.name} name={value.name} key={value.name} tooltip={value.tooltip} value={value.value} />)
+              childValues.push(
+                <div>
+                  <input
+                    type='radio'
+                    id={value.name}
+                    name={value.name}
+                    key={value.name}
+                    tooltip={value.tooltip}
+                    value={value.value}
+                  />
+                  <label
+                    for={value.name}
+                  >{value.label}</label>
+                </div>
+              )
               break;
           }
         });
@@ -71,11 +111,49 @@ class Input extends Component {
       else {
         switch (this.props.type) {
           case 'radio':
-            return childValues.push(<input type='radio' id={value.name} name={value.name} tooltip={value.tooltip} value={value.value} />)
+            return childValues.push(
+              <div>
+                <input
+                  type='radio'
+                  id={value.name}
+                  name={value.name}
+                  key={value.name}
+                  tooltip={value.tooltip}
+                  value={value.value}
+                />
+                <label
+                  for={value.name}
+                >{value.label}</label>
+              </div>
+            )
           case 'select':
-            return childValues.push(<option id={value.name} name={value.name} tooltip={value.tooltip} value={value.value}>{value.name}</option>)
+            return childValues.push(
+              <option
+                id={value.name}
+                name={value.name}
+                key={value.name}
+                tooltip={value.tooltip}
+                value={value.value}
+              >
+                {value.name}
+              </option>
+            )
           default:
-            return childValues.push(<input type='radio' id={value.name} name={value.name} tooltip={value.tooltip} value={value.value} />)
+            return childValues.push(
+              <div>
+                <input
+                  type='radio'
+                  id={value.name}
+                  name={value.name}
+                  key={value.name}
+                  tooltip={value.tooltip}
+                  value={value.value}
+                />
+                <label
+                  for={value.name}
+                >{value.label}</label>
+              </div>
+            )
         }
       }
     }
@@ -640,8 +718,9 @@ Input.propTypes = {
    */
   childValues: PropTypes.arrayOf(
     PropTypes.shape({
-      tooltip: PropTypes.string,
+      label: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
+      tooltip: PropTypes.string,
       value: PropTypes.string.isRequired
     })
   ),
