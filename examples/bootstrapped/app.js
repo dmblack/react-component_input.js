@@ -4,6 +4,7 @@ import Input from 'react-component_input';
 import Button from './button';
 import Password from './password';
 import Radio from './radio';
+import Select from './select';
 import TextExample from './text';
 import Textarea from './textarea';
 
@@ -13,6 +14,7 @@ const examples = [
   Button,
   Password,
   Radio,
+  Select,
   TextExample,
   Textarea
 ];

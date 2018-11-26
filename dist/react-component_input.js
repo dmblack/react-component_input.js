@@ -324,6 +324,7 @@ var Input = function (_Component) {
       hasChanged: false,
       hasFocus: false,
       id: _this2.props.identifier || undefined,
+      disabled: _this2.props.disabled || false,
       isValid: _this2.props.validation ? false : true,
       justChanged: false,
       value: _this2.props.value || "",
@@ -341,6 +342,47 @@ var Input = function (_Component) {
       }
 
       return element + " " + element + "-container " + element + "-" + _this2.props.type + " " + (_this2.state.hasChanged ? element + "-touched" : element + "-untouched") + " " + (_this2.state.hasFocus ? element + "-focus" : element + "-nofocus") + " " + (_this2.props.validation ? _this2.state.isValid ? element + "-validation " + element + "-valid" : element + "-validation " + element + "-invalid" : element + "-novalidation");
+    };
+
+    /**
+     * Used for input taht have child value like behavior (radio, select)
+     */
+    _this2.childValueFactory = function (values) {
+      if (values instanceof Array) {
+        var _childValues = [];
+        values.forEach(function (value) {
+          switch (_this2.props.type) {
+            case 'radio':
+              _childValues.push(_react2.default.createElement("input", { type: "radio", id: value.name, name: value.name, key: value.name, tooltip: value.tooltip, value: value.value }));
+              break;
+            case 'select':
+              _childValues.push(_react2.default.createElement(
+                "option",
+                { id: value.name, name: value.name, key: value.name, tooltip: value.tooltip, value: value.value },
+                value.name
+              ));
+              break;
+            default:
+              _childValues.push(_react2.default.createElement("input", { type: "radio", id: value.name, name: value.name, key: value.name, tooltip: value.tooltip, value: value.value }));
+              break;
+          }
+        });
+
+        return _childValues;
+      } else {
+        switch (_this2.props.type) {
+          case 'radio':
+            return childValues.push(_react2.default.createElement("input", { type: "radio", id: value.name, name: value.name, tooltip: value.tooltip, value: value.value }));
+          case 'select':
+            return childValues.push(_react2.default.createElement(
+              "option",
+              { id: value.name, name: value.name, tooltip: value.tooltip, value: value.value },
+              value.name
+            ));
+          default:
+            return childValues.push(_react2.default.createElement("input", { type: "radio", id: value.name, name: value.name, tooltip: value.tooltip, value: value.value }));
+        }
+      }
     };
 
     // onBlur
@@ -620,6 +662,7 @@ var Input = function (_Component) {
       if (this.props.type === "button") {
         this.handleChange(clonedEvent);
       }
+
       this.setState({
         wasClicked: true
       }, function () {
@@ -747,20 +790,20 @@ var Input = function (_Component) {
         } else {
           validationResult = false;
           this.setState({
-            validationErrorMessage: this.props.validation[validationFailureIndex].errorMessage
+            errorMessage: this.props.validation[validationFailureIndex].errorMessage
           });
         }
       } else {
         validationResult = this.props.validation.callback(value);
         if (validationResult !== true) {
           this.setState({
-            validationErrorMessage: this.props.validation.errorMessage
+            errorMessage: this.props.validation.errorMessage
           });
         }
       }
 
       if (validationResult) {
-        this.setState({ validationErrorMessage: '' });
+        this.setState({ errorMessage: '' });
       };
 
       this.setState({
@@ -783,10 +826,13 @@ var Input = function (_Component) {
 
       var validationClassNames = this.props.validationClassNames ? this.classFactory(this.props.validationClassNames) : this.classFactory('validation');
 
+      var childValues = this.props.childValues ? this.childValueFactory(this.props.childValues) : undefined;
+
       switch (this.props.type) {
         case "button":
           thisInput = _react2.default.createElement("input", {
             className: inputClassNames,
+            disabled: this.state.disabled || false,
             id: this.props.identifier,
             name: this.props.name || this.props.identifier,
             onBlur: this.handleBlur,
@@ -800,22 +846,45 @@ var Input = function (_Component) {
           break;
 
         case "radio":
-          thisInput = _react2.default.createElement("input", {
-            className: inputClassNames,
-            id: this.props.identifier,
-            name: this.props.name || this.props.identifier,
-            onBlur: this.handleBlur,
-            onChange: this.handleChange,
-            onClick: this.handleClick,
-            onFocus: this.handleFocus,
-            placeholder: this.props.placeholder || "",
-            type: this.props.type
-          });
+          thisInput = _react2.default.createElement(
+            "div",
+            {
+              className: inputClassNames,
+              disabled: this.state.disabled || false,
+              id: this.props.identifier,
+              name: this.props.name || this.props.identifier,
+              onBlur: this.handleBlur,
+              onChange: this.handleChange,
+              onClick: this.handleClick,
+              onFocus: this.handleFocus,
+              placeholder: this.props.placeholder || "",
+              type: this.props.type },
+            childValues
+          );
+          break;
+
+        case "select":
+          thisInput = _react2.default.createElement(
+            "select",
+            {
+              className: inputClassNames,
+              disabled: this.state.disabled || false,
+              id: this.props.identifier,
+              name: this.props.name || this.props.identifier,
+              onBlur: this.handleBlur,
+              onChange: this.handleChange,
+              onClick: this.handleClick,
+              onFocus: this.handleFocus,
+              placeholder: this.props.placeholder || "",
+              type: this.props.type },
+            childValues
+          );
           break;
 
         case "text":
           thisInput = _react2.default.createElement("input", {
             className: inputClassNames,
+            disabled: this.state.disabled || false,
             id: this.props.identifier,
             name: this.props.name || this.props.identifier,
             onBlur: this.handleBlur,
@@ -831,6 +900,7 @@ var Input = function (_Component) {
         case "textarea":
           thisInput = _react2.default.createElement("textarea", {
             className: inputClassNames,
+            disabled: this.state.disabled || false,
             id: this.props.identifier,
             name: this.props.name || this.props.identifier,
             onBlur: this.handleBlur,
@@ -846,6 +916,7 @@ var Input = function (_Component) {
         default:
           thisInput = _react2.default.createElement("input", {
             className: inputClassNames,
+            disabled: this.state.disabled || false,
             id: this.props.identifier,
             name: this.props.name || this.props.identifier,
             onBlur: this.handleBlur,
@@ -864,7 +935,7 @@ var Input = function (_Component) {
         thisValidation = _react2.default.createElement(
           "p",
           { className: validationClassNames },
-          this.state.validationErrorMessage
+          this.state.errorMessage
         );
       }
 
@@ -886,8 +957,19 @@ var Input = function (_Component) {
 }(_react.Component);
 
 Input.propTypes = {
+  /** childValues are objects that which the input is dependent, such
+   * as a radio, or a select input. Name and Value are mandatory, however
+   * tooltip is optional.
+   */
+  childValues: _propTypes2.default.arrayOf(_propTypes2.default.shape({
+    tooltip: _propTypes2.default.string,
+    name: _propTypes2.default.string.isRequired,
+    value: _propTypes2.default.string.isRequired
+  })),
   /** containerClassNames are class names applied to the container only. */
   containerClassNames: _propTypes2.default.oneOfType([_propTypes2.default.arrayOf(_propTypes2.default.string), _propTypes2.default.string]),
+  // Enables 'disabled' html input type - which is a browser behavior.
+  disabled: _propTypes2.default.bool,
   /** Defines the HTML ID applied to the input (Required). */
   identifier: _propTypes2.default.string.isRequired,
   /** An input class names override for the input. Expects a, or array of,

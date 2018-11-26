@@ -48,10 +48,10 @@ serve:
 	@npm start
 
 tests:
-	@npm run test
+	#@npm run test
 
 tests-single-run:
-	@npm run test
+	#@npm run test
 
 coveralls:
 	-cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js 2>/dev/null

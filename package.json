@@ -1,6 +1,6 @@
 {
   "name": "react-component_input",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "An input component to serve the common good.",
   "main": "./lib/index.js",
   "repository": {
