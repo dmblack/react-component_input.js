@@ -106,9 +106,9 @@ class Input extends Component {
         });
 
         return childValues;
-      }
-
-      else {
+        // Catches instances in which radio, select,
+        //  are type but no child values exist.
+      } else if (typeof values !== 'undefined') {
         switch (this.props.type) {
           case 'radio':
             return childValues.push(
@@ -154,6 +154,15 @@ class Input extends Component {
                 >{value.label}</label>
               </div>
             )
+        }
+        // Handle those missing child values..
+      } else {
+        switch (this.props.type) {
+          case 'radio':
+            return <input type={this.props.type} />;
+          
+          case 'select':
+            return <option />
         }
       }
     }
@@ -347,6 +356,9 @@ class Input extends Component {
     let thisValue = null;
 
     switch (this.props.type) {
+      case "button":
+        break;
+
       default:
         thisValue = clonedEvent.target.value;
         break;
@@ -578,7 +590,7 @@ class Input extends Component {
 
     let childValues = this.props.childValues
       ? this.childValueFactory(this.props.childValues)
-      : undefined
+      : this.childValueFactory();
 
     switch (this.props.type) {
       case "button":

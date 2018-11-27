@@ -10,17 +10,25 @@ const commonInput = [
 ]
 
 commonInput.forEach(thisInput => {
+  const basicInput = () => {
+    return <Input
+      type={thisInput}
+      identifier="testInput"
+      labelContent="Test Input"
+    />
+  }
+
   it(thisInput + " - renders without crashing", () => {
     const div = document.createElement("div");
     ReactDOM.render(
-      <Input type={thisInput} identifier="testInput" labelContent="Test Input" />,
+      basicInput(),
       div
     );
   });
 
   it(thisInput + " - should have a html div container", () => {
     const wrapper = shallow(
-      <Input type={thisInput} identifier="testInput" labelContent="Test Input" />
+      basicInput()
     );
     let container = wrapper.find("#testInput");
 
@@ -29,7 +37,7 @@ commonInput.forEach(thisInput => {
 
   it(thisInput + " - container has appropriate classes", () => {
     const wrapper = shallow(
-      <Input type={thisInput} identifier="testInput" labelContent="Test Input" />
+      basicInput()
     );
     let container = wrapper.find(
       "[className='input input-container input-" + thisInput + " input-untouched input-nofocus input-novalidation']"
@@ -73,7 +81,7 @@ commonInput.forEach(thisInput => {
 
   it(thisInput + " - should have a html label element", () => {
     const wrapper = shallow(
-      <Input type={thisInput} identifier="testInput" labelContent="Test Input" />
+      basicInput()
     );
     let label = wrapper.find("label").prop("children");
 
@@ -82,7 +90,7 @@ commonInput.forEach(thisInput => {
 
   it(thisInput + " - label should have appropraite classes", () => {
     const wrapper = shallow(
-      <Input type={thisInput} identifier="testInput" labelContent="Test Input" />
+      basicInput()
     );
     let label = wrapper.find(
       "[className='label label-container label-" + thisInput + " label-untouched label-nofocus label-novalidation']"
@@ -107,18 +115,21 @@ commonInput.forEach(thisInput => {
     expect(label.length).toEqual(1);
   });
 
-  it(thisInput + " - should have a html input element", () => {
-    const wrapper = shallow(
-      <Input type={thisInput} identifier="testInput" labelContent="Test Input" />
-    );
-    let input = wrapper.find("input");
+  // Select, textarea, elements do not have a html input element.
+  if (thisInput !== 'select' && thisInput !== 'textarea') {
+    it(thisInput + " - should have a html input element", () => {
+      const wrapper = shallow(
+        basicInput()
+      );
+      let input = wrapper.find("input");
 
-    expect(input.length).toEqual(1);
-  });
+      expect(input.length).toEqual(1);
+    });
+  }
 
   it(thisInput + " - input should have appropriate classes", () => {
     const wrapper = shallow(
-      <Input type={thisInput} identifier="testInput" labelContent="Test Input" />
+      basicInput()
     );
     let input = wrapper.find(
       "[className='" + thisInput + " " + thisInput + "-container " + thisInput + "-" + thisInput + " " + thisInput + "-untouched " + thisInput + "-nofocus " + thisInput + "-novalidation']"
@@ -220,20 +231,21 @@ commonInput.forEach(thisInput => {
     expect(name.length).toEqual(0);
   });
 
-  it(thisInput + " - accepts, and renders, value password", () => {
-    const wrapper = shallow(
-      <Input
-        type={thisInput}
-        identifier="testInput"
-        labelContent="Test Input"
-        value="Test Value"
-      />
-    );
+  if (thisInput !== 'radio' && thisInput !== 'select')
+    it(thisInput + " - accepts, and renders, value password", () => {
+      const wrapper = shallow(
+        <Input
+          type={thisInput}
+          identifier="testInput"
+          labelContent="Test Input"
+          value="Test Value"
+        />
+      );
 
-    let value = wrapper.find("[value='Test Value']");
+      let value = wrapper.find("[value='Test Value']");
 
-    expect(value.length).toEqual(1);
-  });
+      expect(value.length).toEqual(1);
+    });
 
   it(thisInput + " - accepts, and renders, placeholder property text", () => {
     const wrapper = shallow(
@@ -269,7 +281,7 @@ commonInput.forEach(thisInput => {
 
   it(thisInput + " - component contains a " + thisInput + "-nofocus class default", () => {
     const wrapper = shallow(
-      <Input type={thisInput} identifier="testInput" labelContent="Test Input" />
+      basicInput()
     );
 
     let hasNoFocus = wrapper.find("." + thisInput + "-nofocus");
@@ -279,7 +291,7 @@ commonInput.forEach(thisInput => {
 
   it(thisInput + " - component contains a " + thisInput + "-focus class upon receiving focus", () => {
     const wrapper = shallow(
-      <Input type={thisInput} identifier="testInput" labelContent="Test Input" />
+      basicInput()
     );
 
     let hasNoFocus = wrapper.find("." + thisInput + "-nofocus");
@@ -295,7 +307,7 @@ commonInput.forEach(thisInput => {
 
   it(thisInput + " - component contains a " + thisInput + "-nofocus class upon receiving focus, then again losing focus", () => {
     const wrapper = shallow(
-      <Input type={thisInput} identifier="testInput" labelContent="Test Input" />
+      basicInput()
     );
 
     let hasNoFocus = wrapper.find("." + thisInput + "-nofocus");
@@ -312,7 +324,7 @@ commonInput.forEach(thisInput => {
 
   it(thisInput + " - component contains a " + thisInput + "-untouched class default", () => {
     const wrapper = shallow(
-      <Input type={thisInput} identifier="testInput" labelContent="Test Input" />
+      basicInput()
     );
 
     let hasNoTouched = wrapper.find("." + thisInput + "-untouched");
@@ -322,7 +334,7 @@ commonInput.forEach(thisInput => {
 
   it(thisInput + " - component contains a " + thisInput + "-untouched class upon change (Touched), and is retained on blur", () => {
     const wrapper = shallow(
-      <Input type={thisInput} identifier="testInput" labelContent="Test Input" />
+      basicInput()
     );
 
     let hasNoTouched = wrapper.find("." + thisInput + "-untouched");
