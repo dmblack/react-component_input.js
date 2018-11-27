@@ -11,11 +11,46 @@ const commonInput = [
 
 commonInput.forEach(thisInput => {
   const basicInput = () => {
-    return <Input
-      type={thisInput}
-      identifier="testInput"
-      labelContent="Test Input"
-    />
+    switch (thisInput) {
+      case "radio":
+        return <Input
+          type={thisInput}
+          identifier="testInput"
+          labelContent="Test Input"
+          childValues={
+            [
+              {
+                name: "testInputRadio",
+                value: "testInputRadio",
+                label: "testInputRadio"
+              }
+            ]
+          }
+        />
+
+      case "select":
+        return <Input
+          type={thisInput}
+          identifier="testInput"
+          labelContent="Test Input"
+          childValues={
+            [
+              {
+                name: "testInputSelect",
+                value: "testInputSelect",
+                label: "testInputSelect"
+              }
+            ]
+          }
+        />
+
+      default:
+        return <Input
+          type={thisInput}
+          identifier="testInput"
+          labelContent="Test Input"
+        />
+    }
   }
 
   it(thisInput + " - renders without crashing", () => {
