@@ -10,7 +10,7 @@ const commonInput = [
 ]
 
 commonInput.forEach(thisInput => {
-  it("renders without crashing", () => {
+  it(thisInput + " - renders without crashing", () => {
     const div = document.createElement("div");
     ReactDOM.render(
       <Input type={thisInput} identifier="testInput" labelContent="Test Input" />,
@@ -18,7 +18,7 @@ commonInput.forEach(thisInput => {
     );
   });
 
-  it("should have a html div container", () => {
+  it(thisInput + " - should have a html div container", () => {
     const wrapper = shallow(
       <Input type={thisInput} identifier="testInput" labelContent="Test Input" />
     );
@@ -27,7 +27,7 @@ commonInput.forEach(thisInput => {
     expect(container.length).toEqual(1);
   });
 
-  it("container has appropriate classes", () => {
+  it(thisInput + " - container has appropriate classes", () => {
     const wrapper = shallow(
       <Input type={thisInput} identifier="testInput" labelContent="Test Input" />
     );
@@ -38,7 +38,7 @@ commonInput.forEach(thisInput => {
     expect(container.length).toEqual(1);
   });
 
-  it("container has appropriate classes when over-ridden with single string", () => {
+  it(thisInput + " - container has appropriate classes when over-ridden with single string", () => {
     const wrapper = shallow(
       <Input
         type={thisInput}
@@ -54,7 +54,7 @@ commonInput.forEach(thisInput => {
     expect(container.length).toEqual(1);
   });
 
-  it("container has appropriate classes when over-ridden with array of strings", () => {
+  it(thisInput + " - container has appropriate classes when over-ridden with array of strings", () => {
     const wrapper = shallow(
       <Input
         type={thisInput}
@@ -71,7 +71,7 @@ commonInput.forEach(thisInput => {
   });
 
 
-  it("should have a html label element", () => {
+  it(thisInput + " - should have a html label element", () => {
     const wrapper = shallow(
       <Input type={thisInput} identifier="testInput" labelContent="Test Input" />
     );
@@ -80,7 +80,7 @@ commonInput.forEach(thisInput => {
     expect(label).toContain("Test Input");
   });
 
-  it("label should have appropraite classes", () => {
+  it(thisInput + " - label should have appropraite classes", () => {
     const wrapper = shallow(
       <Input type={thisInput} identifier="testInput" labelContent="Test Input" />
     );
@@ -91,7 +91,7 @@ commonInput.forEach(thisInput => {
     expect(label.length).toEqual(1);
   });
 
-  it("label should have appropraite classes when over-ridden with an array of strings", () => {
+  it(thisInput + " - label should have appropraite classes when over-ridden with an array of strings", () => {
     const wrapper = shallow(
       <Input
         type={thisInput}
@@ -107,7 +107,7 @@ commonInput.forEach(thisInput => {
     expect(label.length).toEqual(1);
   });
 
-  it("should have a html input element", () => {
+  it(thisInput + " - should have a html input element", () => {
     const wrapper = shallow(
       <Input type={thisInput} identifier="testInput" labelContent="Test Input" />
     );
@@ -116,7 +116,7 @@ commonInput.forEach(thisInput => {
     expect(input.length).toEqual(1);
   });
 
-  it("input should have appropriate classes", () => {
+  it(thisInput + " - input should have appropriate classes", () => {
     const wrapper = shallow(
       <Input type={thisInput} identifier="testInput" labelContent="Test Input" />
     );
@@ -127,7 +127,7 @@ commonInput.forEach(thisInput => {
     expect(input.length).toEqual(1);
   });
 
-  it("input should have appropriate classes when over-ridden with an array of strings", () => {
+  it(thisInput + " - input should have appropriate classes when over-ridden with an array of strings", () => {
     const wrapper = shallow(
       <Input
         type={thisInput}
@@ -143,7 +143,7 @@ commonInput.forEach(thisInput => {
     expect(input.length).toEqual(1);
   });
 
-  it("should have a html p (validation) element", () => {
+  it(thisInput + " - should have a html p (validation) element", () => {
     const wrapper = shallow(
       <Input
         type={thisInput}
@@ -157,7 +157,7 @@ commonInput.forEach(thisInput => {
     expect(input.length).toEqual(1);
   });
 
-  it("p (validation) should have appropriate classes", () => {
+  it(thisInput + " - p (validation) should have appropriate classes", () => {
     const wrapper = shallow(
       <Input
         type={thisInput}
@@ -173,7 +173,7 @@ commonInput.forEach(thisInput => {
     expect(input.length).toEqual(1);
   });
 
-  it("p (validation) should have appropriate classes when over-ridden by an array of strings", () => {
+  it(thisInput + " - p (validation) should have appropriate classes when over-ridden by an array of strings", () => {
     const wrapper = shallow(
       <Input
         type={thisInput}
@@ -190,7 +190,7 @@ commonInput.forEach(thisInput => {
     expect(input.length).toEqual(1);
   });
 
-  it("accepts, and renders, name property text", () => {
+  it(thisInput + " - accepts, and renders, name property text", () => {
     const wrapper = shallow(
       <Input
         type={thisInput}
@@ -205,7 +205,7 @@ commonInput.forEach(thisInput => {
     expect(name.length).toEqual(1);
   });
 
-  it("accepts, and renders, name property text - control (ensures no false positive)", () => {
+  it(thisInput + " - accepts, and renders, name property text - control (ensures no false positive)", () => {
     const wrapper = shallow(
       <Input
         type={thisInput}
@@ -220,7 +220,7 @@ commonInput.forEach(thisInput => {
     expect(name.length).toEqual(0);
   });
 
-  it("accepts, and renders, value password", () => {
+  it(thisInput + " - accepts, and renders, value password", () => {
     const wrapper = shallow(
       <Input
         type={thisInput}
@@ -235,7 +235,7 @@ commonInput.forEach(thisInput => {
     expect(value.length).toEqual(1);
   });
 
-  it("accepts, and renders, placeholder property text", () => {
+  it(thisInput + " - accepts, and renders, placeholder property text", () => {
     const wrapper = shallow(
       <Input
         type={thisInput}
@@ -250,7 +250,7 @@ commonInput.forEach(thisInput => {
     expect(placeholder.length).toEqual(1);
   });
 
-  it("accepts, and renders, placeholder property text - control (ensures no false positive)", () => {
+  it(thisInput + " - accepts, and renders, placeholder property text - control (ensures no false positive)", () => {
     const wrapper = shallow(
       <Input
         type={thisInput}
@@ -267,7 +267,7 @@ commonInput.forEach(thisInput => {
     expect(placeholder.length).toEqual(0);
   });
 
-  it("component contains a " + thisInput + "-nofocus class default", () => {
+  it(thisInput + " - component contains a " + thisInput + "-nofocus class default", () => {
     const wrapper = shallow(
       <Input type={thisInput} identifier="testInput" labelContent="Test Input" />
     );
@@ -277,7 +277,7 @@ commonInput.forEach(thisInput => {
     expect(hasNoFocus.length).toEqual(1);
   });
 
-  it("component contains a " + thisInput + "-focus class upon receiving focus", () => {
+  it(thisInput + " - component contains a " + thisInput + "-focus class upon receiving focus", () => {
     const wrapper = shallow(
       <Input type={thisInput} identifier="testInput" labelContent="Test Input" />
     );
@@ -293,7 +293,7 @@ commonInput.forEach(thisInput => {
     expect(nowHasFocus.length).toEqual(1);
   });
 
-  it("component contains a " + thisInput + "-nofocus class upon receiving focus, then again losing focus", () => {
+  it(thisInput + " - component contains a " + thisInput + "-nofocus class upon receiving focus, then again losing focus", () => {
     const wrapper = shallow(
       <Input type={thisInput} identifier="testInput" labelContent="Test Input" />
     );
@@ -310,7 +310,7 @@ commonInput.forEach(thisInput => {
     expect(noLongerHasFocus.length).toEqual(1);
   });
 
-  it("component contains a " + thisInput + "-untouched class default", () => {
+  it(thisInput + " - component contains a " + thisInput + "-untouched class default", () => {
     const wrapper = shallow(
       <Input type={thisInput} identifier="testInput" labelContent="Test Input" />
     );
@@ -320,7 +320,7 @@ commonInput.forEach(thisInput => {
     expect(hasNoTouched.length).toEqual(1);
   });
 
-  it("component contains a " + thisInput + "-untouched class upon change (Touched), and is retained on blur", () => {
+  it(thisInput + " - component contains a " + thisInput + "-untouched class upon change (Touched), and is retained on blur", () => {
     const wrapper = shallow(
       <Input type={thisInput} identifier="testInput" labelContent="Test Input" />
     );
@@ -337,7 +337,7 @@ commonInput.forEach(thisInput => {
     expect(stillRetainsTouched.length).toEqual(1);
   });
 
-  it("accepts an onChange object, and updates the state of onChange with appropraite response criteria", () => {
+  it(thisInput + " - accepts an onChange object, and updates the state of onChange with appropraite response criteria", () => {
     const wrapper = shallow(
       <Input
         type={thisInput}
@@ -354,7 +354,7 @@ commonInput.forEach(thisInput => {
     expect(wrapper.state("onChangeCallback")).toEqual({ result: true });
   });
 
-  it("accepts an onChange object [array of], and updates the state of onChange with the appropriate response criteria", () => {
+  it(thisInput + " - accepts an onChange object [array of], and updates the state of onChange with the appropriate response criteria", () => {
     const wrapper = shallow(
       <Input
         type={thisInput}
@@ -379,7 +379,7 @@ commonInput.forEach(thisInput => {
     expect(wrapper.state("onChangeCallback")[1]).toEqual({ result: false });
   });
 
-  it("component accepts disabled propery, which inhibits changing value", () => {
+  it(thisInput + " - component accepts disabled propery, which inhibits changing value", () => {
     const wrapper = shallow(
       <Input type={thisInput} identifier="testInput" labelContent="Test Input" disabled={true} />
     );
@@ -400,7 +400,7 @@ commonInput.forEach(thisInput => {
   });
 
 
-  it("accepts an onClick object, and updates the state of onClick with appropraite response criteria", () => {
+  it(thisInput + " - accepts an onClick object, and updates the state of onClick with appropraite response criteria", () => {
     const wrapper = shallow(
       <Input
         type={thisInput}
@@ -417,7 +417,7 @@ commonInput.forEach(thisInput => {
     expect(wrapper.state("onClickCallback")).toEqual({ result: true });
   });
 
-  it("accepts an onClick object [array of], and updates the state of onClick with the appropriate response criteria", () => {
+  it(thisInput + " - accepts an onClick object [array of], and updates the state of onClick with the appropriate response criteria", () => {
     const wrapper = shallow(
       <Input
         type={thisInput}
@@ -442,7 +442,7 @@ commonInput.forEach(thisInput => {
     expect(wrapper.state("onClickCallback")[1]).toEqual({ result: false });
   });
 
-  it("accepts an onFocus object, and updates the state of onFocus with appropraite response criteria", () => {
+  it(thisInput + " - accepts an onFocus object, and updates the state of onFocus with appropraite response criteria", () => {
     const wrapper = shallow(
       <Input
         type={thisInput}
@@ -460,7 +460,7 @@ commonInput.forEach(thisInput => {
     expect(wrapper.state("onFocusCallback")).toEqual({ result: true });
   });
 
-  it("accepts an onFocus object [array of], and updates the state of onFocus with the appropriate response criteria", () => {
+  it(thisInput + " - accepts an onFocus object [array of], and updates the state of onFocus with the appropriate response criteria", () => {
     const wrapper = shallow(
       <Input
         type={thisInput}
@@ -486,7 +486,7 @@ commonInput.forEach(thisInput => {
     expect(wrapper.state("onFocusCallback")[1]).toEqual({ result: false });
   });
 
-  it("accepts an onBlur object, and updates the state of onBlur with appropraite response criteria", () => {
+  it(thisInput + " - accepts an onBlur object, and updates the state of onBlur with appropraite response criteria", () => {
     const wrapper = shallow(
       <Input
         type={thisInput}
@@ -505,7 +505,7 @@ commonInput.forEach(thisInput => {
     expect(wrapper.state("onBlurCallback")).toEqual({ result: true });
   });
 
-  it("accepts an onBlur object [array of], and updates the state of onBlur with the appropriate response criteria", () => {
+  it(thisInput + " - accepts an onBlur object [array of], and updates the state of onBlur with the appropriate response criteria", () => {
     const wrapper = shallow(
       <Input
         type={thisInput}
@@ -532,7 +532,7 @@ commonInput.forEach(thisInput => {
     expect(wrapper.state("onBlurCallback")[1]).toEqual({ result: false });
   });
 
-  it("accepts an onComponentDidMount object, and updates the state of onComponentDidMount with appropraite response criteria", () => {
+  it(thisInput + " - accepts an onComponentDidMount object, and updates the state of onComponentDidMount with appropraite response criteria", () => {
     const wrapper = shallow(
       <Input
         type={thisInput}
@@ -549,7 +549,7 @@ commonInput.forEach(thisInput => {
     });
   });
 
-  it("accepts an onComponentDidMount object [array of], and updates the state of onComponentDidMount with the appropriate response criteria", () => {
+  it(thisInput + " - accepts an onComponentDidMount object [array of], and updates the state of onComponentDidMount with the appropriate response criteria", () => {
     const wrapper = shallow(
       <Input
         type={thisInput}
