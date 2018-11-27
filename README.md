@@ -206,3 +206,9 @@ For now; the behavior was included to provide exposure to the validation
 error.
 
 See; https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input
+
+## Contributing
+Requirements (Build);
+* ksh
+* make (build-essential)
+* python-tz
