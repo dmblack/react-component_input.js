@@ -65,7 +65,7 @@ class Input extends Component {
                     value={value.value}
                   />
                   <label
-                    for={value.name}
+                    htmlFor={value.name}
                   >{value.label}</label>
                 </div>
               )
@@ -97,7 +97,7 @@ class Input extends Component {
                     value={value.value}
                   />
                   <label
-                    for={value.name}
+                    htmlFor={value.name}
                   >{value.label}</label>
                 </div>
               )
@@ -122,7 +122,7 @@ class Input extends Component {
                   value={value.value}
                 />
                 <label
-                  for={value.name}
+                  htmlFor={value.name}
                 >{value.label}</label>
               </div>
             )
@@ -150,7 +150,7 @@ class Input extends Component {
                   value={value.value}
                 />
                 <label
-                  for={value.name}
+                  htmlFor={value.name}
                 >{value.label}</label>
               </div>
             )
