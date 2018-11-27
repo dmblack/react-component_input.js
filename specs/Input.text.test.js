@@ -5,26 +5,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { shallow, toEqual } from "enzyme";
 import Input from "./../src";
-
-let maxLength = value => {
-  return value.length <= 10;
-};
-
-let minLength = value => {
-  return value.length > 0;
-};
-
-let greaterThanZero = {
-  callback: minLength,
-  errorMessage:
-    "Your input is too short. Expecting anything longer than 0"
-};
-
-let lessThanTen = {
-  callback: maxLength,
-  errorMessage:
-    "Your input is too long. Expecting anything less than 10 characters long."
-};
+import CommonValidation from "./common.helpers";
 
 it("renders without crashing", () => {
   const div = document.createElement("div");
@@ -164,7 +145,7 @@ it("should have a html p (validation) element", () => {
       type="text"
       identifier="testInput"
       labelContent="Test Input"
-      validation={greaterThanZero}
+      validation={CommonValidation.greaterThanZero}
     />
   );
   let input = wrapper.find("p");
@@ -178,7 +159,7 @@ it("p (validation) should have appropriate classes", () => {
       type="text"
       identifier="testInput"
       labelContent="Test Input"
-      validation={greaterThanZero}
+      validation={CommonValidation.greaterThanZero}
     />
   );
   let input = wrapper.find(
@@ -195,7 +176,7 @@ it("p (validation) should have appropriate classes when over-ridden by an array 
       identifier="testInput"
       labelContent="Test Input"
       validationClassNames={["noitadilav", "noitadila"]}
-      validation={greaterThanZero}
+      validation={CommonValidation.greaterThanZero}
     />
   );
   let input = wrapper.find(
@@ -357,7 +338,7 @@ it("accepts a validation object, with default state validation-invalid", () => {
   const wrapper = shallow(
     <Input
       type="text"
-      validation={greaterThanZero}
+      validation={CommonValidation.greaterThanZero}
       identifier="testInput"
       labelContent="Test Input"
     />
@@ -391,7 +372,7 @@ it("accepts a validation object, and updates state to validation-valid upon succ
   const wrapper = shallow(
     <Input
       type="text"
-      validation={greaterThanZero}
+      validation={CommonValidation.greaterThanZero}
       identifier="testInput"
       labelContent="Test Input"
     />
@@ -408,7 +389,7 @@ it("accepts an array of validation objects, and updates state to validation-vali
   const wrapper = shallow(
     <Input
       type="text"
-      validation={[greaterThanZero, lessThanTen]}
+      validation={[CommonValidation.greaterThanZero, CommonValidation.lessThanTen]}
       identifier="testInput"
       labelContent="Test Input"
     />
@@ -425,7 +406,7 @@ it("accepts an array of validation objects, and updates state to validation-inva
   const wrapper = shallow(
     <Input
       type="text"
-      validation={[greaterThanZero, lessThanTen]}
+      validation={[CommonValidation.greaterThanZero, CommonValidation.lessThanTen]}
       identifier="testInput"
       labelContent="Test Input"
     />
@@ -445,7 +426,7 @@ then validation-invalid upon additional changes failing validation criteria", ()
   const wrapper = shallow(
     <Input
       type="text"
-      validation={greaterThanZero}
+      validation={CommonValidation.greaterThanZero}
       identifier="testInput"
       labelContent="Test Input"
     />

@@ -5,16 +5,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { shallow, toEqual } from "enzyme";
 import Input from "./../src";
-
-let minLength = value => {
-  return value.length > 0;
-};
-
-let greaterThanZero = {
-  callback: minLength,
-  errorMessage:
-    "Your input is too short. Expecting anything longer than 0"
-};
+import CommonValidation from "./common.helpers"
 
 it("renders without crashing", () => {
   const div = document.createElement("div");
@@ -145,7 +136,7 @@ it("should have a html p (validation) element", () => {
       type="button"
       identifier="testInput"
       labelContent="Test Input"
-      validation={greaterThanZero}
+      validation={CommonValidation.greaterThanZero}
     />
   );
   let input = wrapper.find("p");
@@ -159,7 +150,7 @@ it("p (validation) should have appropriate classes", () => {
       type="button"
       identifier="testInput"
       labelContent="Test Input"
-      validation={greaterThanZero}
+      validation={CommonValidation.greaterThanZero}
     />
   );
   let input = wrapper.find(
@@ -175,7 +166,7 @@ it("p (validation) should have appropriate classes when over-ridden by an array 
       type="button"
       identifier="testInput"
       labelContent="Test Input"
-      validation={greaterThanZero}
+      validation={CommonValidation.greaterThanZero}
       validationClassNames={["noitadilav", "noitadila"]}
     />
   );

@@ -5,26 +5,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { shallow, toEqual } from "enzyme";
 import Input from "./../src";
-
-let maxLength = value => {
-  return value.length <= 10;
-};
-
-let minLength = value => {
-  return value.length > 0;
-};
-
-let greaterThanZero = {
-  callback: minLength,
-  errorMessage:
-    "Your input is too short. Expecting anything longer than 0"
-};
-
-let lessThanTen = {
-  callback: maxLength,
-  errorMessage:
-    "Your input is too long. Expecting anything less than 10 characters long."
-};
+import CommonValidation from "./common.helpers";
 
 it("renders without crashing", () => {
   const div = document.createElement("div");
@@ -155,7 +136,7 @@ it("should have a html p (validation) element", () => {
       type="radio"
       identifier="testInput"
       labelContent="Test Input"
-      validation={greaterThanZero}
+      validation={CommonValidation.greaterThanZero}
     />
   );
   let input = wrapper.find("p");
@@ -169,7 +150,7 @@ it("p (validation) should have appropriate classes", () => {
       type="radio"
       identifier="testInput"
       labelContent="Test Input"
-      validation={greaterThanZero}
+      validation={CommonValidation.greaterThanZero}
     />
   );
   let input = wrapper.find(
@@ -185,7 +166,7 @@ it("p (validation) should have appropriate classes when over-ridden by an array 
       type="radio"
       identifier="testInput"
       labelContent="Test Input"
-      validation={greaterThanZero}
+      validation={CommonValidation.greaterThanZero}
       validationClassNames={["noitadilav", "noitadila"]}
     />
   );
@@ -348,7 +329,7 @@ it("accepts a validation object, with default state validation-invalid", () => {
   const wrapper = shallow(
     <Input
       type="radio"
-      validation={greaterThanZero}
+      validation={CommonValidation.greaterThanZero}
       identifier="testInput"
       labelContent="Test Input"
     />
