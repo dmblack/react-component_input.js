@@ -22,15 +22,14 @@ commonInput.forEach(thisInput => {
           type={thisInput}
           identifier="testInput"
           labelContent="Test Input"
+          name="TestRadio"
           childValues={
             [
               {
-                name: "testInputRadioA",
                 value: "testInputRadioA",
                 label: "testInputRadioA"
               },
               {
-                name: "testInputRadioB",
                 value: "testInputRadioB",
                 label: "testInputRadioB"
               }
@@ -281,7 +280,7 @@ commonInput.forEach(thisInput => {
     expect(name.length).toEqual(0);
   });
 
-  if (thisInput !== 'radio' && thisInput !== 'select')
+  if (thisInput !== 'radio' && thisInput !== 'select') {
     it(thisInput + " - accepts, and renders, value password", () => {
       const wrapper = shallow(
         <Input
@@ -296,6 +295,7 @@ commonInput.forEach(thisInput => {
 
       expect(value.length).toEqual(1);
     });
+  }
 
   it(thisInput + " - accepts, and renders, placeholder property text", () => {
     const wrapper = shallow(
@@ -403,7 +403,7 @@ commonInput.forEach(thisInput => {
 
   // Need to fix this for radio - inputs are childValues and do not
   //  receive these same behaviors.. yet.
-  if (thisInput !== "radio" && thisInput !== "select") {
+  if (thisInput !== "select") {
     it(thisInput + " - accepts an onChange object, and updates the state of onChange with appropraite response criteria", () => {
       const wrapper = shallow(
         <Input

@@ -59,10 +59,14 @@ class Input extends Component {
                   <input
                     type='radio'
                     id={value.name}
-                    name={value.name}
+                    name={this.props.name}
                     key={value.name}
                     tooltip={value.tooltip}
                     value={value.value}
+                    onBlur={this.handleBlur}
+                    onChange={this.handleChange}
+                    onClick={this.handleClick}
+                    onFocus={this.handleFocus}        
                   />
                   <label
                     htmlFor={value.name}
@@ -79,6 +83,10 @@ class Input extends Component {
                   key={value.name}
                   tooltip={value.tooltip}
                   value={value.value}
+                  onBlur={this.handleBlur}
+                  onChange={this.handleChange}
+                  onClick={this.handleClick}
+                  onFocus={this.handleFocus}
                 >
                   {value.name}
                 </option>
@@ -91,10 +99,14 @@ class Input extends Component {
                   <input
                     type='radio'
                     id={value.name}
-                    name={value.name}
+                    name={this.props.name}
                     key={value.name}
                     tooltip={value.tooltip}
                     value={value.value}
+                    onBlur={this.handleBlur}
+                    onChange={this.handleChange}
+                    onClick={this.handleClick}
+                    onFocus={this.handleFocus}
                   />
                   <label
                     htmlFor={value.name}
@@ -116,10 +128,14 @@ class Input extends Component {
                 <input
                   type='radio'
                   id={value.name}
-                  name={value.name}
+                  name={this.props.name}
                   key={value.name}
                   tooltip={value.tooltip}
                   value={value.value}
+                  onBlur={this.handleBlur}
+                  onChange={this.handleChange}
+                  onClick={this.handleClick}
+                  onFocus={this.handleFocus}
                 />
                 <label
                   htmlFor={value.name}
@@ -134,6 +150,10 @@ class Input extends Component {
                 key={value.name}
                 tooltip={value.tooltip}
                 value={value.value}
+                onBlur={this.handleBlur}
+                onChange={this.handleChange}
+                onClick={this.handleClick}
+                onFocus={this.handleFocus}
               >
                 {value.name}
               </option>
@@ -144,10 +164,14 @@ class Input extends Component {
                 <input
                   type='radio'
                   id={value.name}
-                  name={value.name}
+                  name={this.props.name}
                   key={value.name}
                   tooltip={value.tooltip}
                   value={value.value}
+                  onBlur={this.handleBlur}
+                  onChange={this.handleChange}
+                  onClick={this.handleClick}
+                  onFocus={this.handleFocus}
                 />
                 <label
                   htmlFor={value.name}
@@ -160,7 +184,7 @@ class Input extends Component {
         switch (this.props.type) {
           case 'radio':
             return <input type={this.props.type} />;
-          
+
           case 'select':
             return <option />
         }
