@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import Input from 'react-component_input';
 import Button from './button';
+import Checkbox from './checkbox';
 import Password from './password';
 import Radio from './radio';
 import Select from './select';
@@ -12,6 +12,7 @@ const appElement = document.getElementById('example');
 
 const examples = [
   Button,
+  Checkbox,
   Password,
   Radio,
   Select,

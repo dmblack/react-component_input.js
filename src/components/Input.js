@@ -5,6 +5,16 @@ class Input extends Component {
   constructor(props) {
     super(props);
 
+    let initialValue = '';
+
+    if (this.props.type === 'checkbox') {
+      initialValue = this.props.value === "true"
+        ? "true"
+        : "false"
+    } else {
+      initialValue = this.props.value || '';
+    }
+
     this.state = {
       hasChanged: false,
       hasFocus: false,
@@ -12,7 +22,7 @@ class Input extends Component {
       disabled: this.props.disabled || false,
       isValid: this.props.validation ? false : true,
       justChanged: false,
-      value: this.props.value || "",
+      value: initialValue,
       valueMask: this.props.valueMask || undefined
     };
 
@@ -66,7 +76,7 @@ class Input extends Component {
                     onBlur={this.handleBlur}
                     onChange={this.handleChange}
                     onClick={this.handleClick}
-                    onFocus={this.handleFocus}        
+                    onFocus={this.handleFocus}
                   />
                   <label
                     htmlFor={value.name}
@@ -383,6 +393,10 @@ class Input extends Component {
       case "button":
         break;
 
+      case "checkbox":
+        thisValue = clonedEvent.target.checked;
+        break;
+
       default:
         thisValue = clonedEvent.target.value;
         break;
@@ -633,6 +647,39 @@ class Input extends Component {
             value={this.state.value}
           />
         );
+        break;
+
+      case "checkbox":
+        thisInput = this.state.value === "true"
+          ? (
+          <input
+            className={inputClassNames}
+            disabled={this.state.disabled || false}
+            id={this.props.identifier}
+            name={this.props.name || this.props.identifier}
+            onBlur={this.handleBlur}
+            onChange={this.handleChange}
+            onClick={this.handleClick}
+            onFocus={this.handleFocus}
+            placeholder={this.props.placeholder || ""}
+            type={this.props.type}
+            checked
+          />
+          )
+          : (
+            <input
+            className={inputClassNames}
+            disabled={this.state.disabled || false}
+            id={this.props.identifier}
+            name={this.props.name || this.props.identifier}
+            onBlur={this.handleBlur}
+            onChange={this.handleChange}
+            onClick={this.handleClick}
+            onFocus={this.handleFocus}
+            placeholder={this.props.placeholder || ""}
+            type={this.props.type}
+          />
+          )
         break;
 
       case "radio":
